@@ -1,0 +1,85 @@
+---
+layout: default
+---
+
+  <section class="about">
+    <figure>
+      <img src="images/trama.jpg" alt="Anthony Trama"/>
+    </figure>
+
+    <h1>Hi, I'm Anthony</h1>
+    <div class="content">
+      <p>I'm web developer living in San Diego and I've been designing sites, print, and shirts for over about 15 years, but my focus has shifting primarily to the web.</p>
+      <p>When I'm not writing code, I'm usually reomodeling my house with my wife or trying to wear out our 2 year old lab, Sonny. Oh, and I eat at least one cheeseburger every week. Take a look at my latest work, what I'm writing, or just say hi".</p>
+    </div>
+  </section>
+
+<section class="postCont">
+  <div class="headingCont">
+    <h1>Recent Posts</h1>    
+  </div>
+  <div class="posts">
+    {% for post in site.posts limit:3 %}
+    <article>
+      <h1><a href="{{post.url}}">{{post.title}}</a></h1>
+      <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        {{post.excerpt}}
+        <a href="{{post.url}}">Continue reading...</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="contact-top">
+
+</div>
+
+  <section id="contact" class="contact">
+
+    <h1>Say Hey!</h1>
+    <div class="contactOpts">
+      <ul class="socialMedia">
+        {% if site.github_username %}
+        <li>
+          {% include icon-github.html username=site.github_username %}
+        </li>
+        {% endif %}
+
+        <li>
+          {% include icon-codepen.html username="atrama"%}
+        </li>
+
+        {% if site.twitter_username %}
+        <li>
+          {% include icon-twitter.html username=site.twitter_username %}
+        </li>
+        {% endif %}
+      </ul>
+
+      <form id="contactForm">
+        <div class="contactInputs">
+          <label for="name">What's Your Name?</label>
+          <input id="name" type="text"  autocomplete required/>
+          <label for="email">What's Your email?</label>
+          <input id="email" type="email"  autocomplete required/>
+          <label for="msg">Message</label>
+          <textarea id="msg" required ></textarea>
+          <p id="contactErr" class="contactErr"></p>
+          <div class="buttonCont">
+            <p id="contactSuc" class="contactSuc">Thanks, I'll get back to you!</p>
+            <button type="submit">Send</button>
+          </div>
+
+        </div>
+
+        <!--formspree -->
+          <input type="hidden" name="_next" value="/">
+          <input type="hidden" name="_subject" value="Trama Site Contact">
+          <input type="text" name="_gotcha" style="display:none" />
+      </form>
+
+    </div>
+  </section>
+  <div class="contact-bottom">
+
+  </div>

@@ -1,0 +1,29 @@
+html, body{
+  @include textBody();
+  font-size:20px;
+}
+
+h1, h2, h3{
+  @include textHeading();
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+h1{
+  font-size:4rem;
+}
+
+p{
+  line-height: 1.5;
+}
+
+a{
+  color:$blue;
+  text-decoration: none;
+  @include trans($speed:.5s, $prop:color);
+
+  &:hover{
+    text-decoration: underline;
+    color:darken($blue, 15%);
+  }
+}

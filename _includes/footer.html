@@ -1,0 +1,24 @@
+<footer class="site-footer">
+
+
+<h2 class="footerHeading">{{ site.title }}</h2>
+<ul class="socialMedia">
+  {% if site.github_username %}
+  <li>
+    {% include icon-github.html username=site.github_username %}
+  </li>
+  {% endif %}
+
+  <li>
+    {% include icon-codepen.html username="atrama"%}
+  </li>
+
+  {% if site.twitter_username %}
+  <li>
+    {% include icon-twitter.html username=site.twitter_username %}
+  </li>
+  {% endif %}
+</ul>
+</footer>
+<script src="/js/main.js" async></script>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic|Merriweather:400,700,300,400italic' rel='stylesheet' type='text/css'>
