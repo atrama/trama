@@ -46,17 +46,19 @@ article{
 
   header{
     display: block;
+    text-align: center;
 
     h1{
       margin-bottom:.25rem;
     }
   }
+
 }
 
 .post{
-  margin-top:2rem;
 
   h1{
+    margin-top: .5rem;
     font-size: 2rem;
     @include mq($size:md){
       font-size:3.75rem;
@@ -72,6 +74,34 @@ article{
   margin-top: .25rem;
   font-weight: 300;
   font-size:.85rem;
+}
+
+.featuredImage{
+  height:30vh;
+  width: 100vw;
+  margin-left: -2%;
+  background-size:cover;
+  background-position:50% 50%;
+  background-repeat: no-repeat;
+
+  @include mq($size:sm){
+    height:40vh;
+  }
+
+  @include mq($size:md){
+    margin-left:-5.5%;
+  }
+
+  @include mq(){
+    height: 70vh;
+    margin-left: -12.5%;
+  }
+
+  a{
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+  }
 }
 
 //WP fixes

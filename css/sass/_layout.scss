@@ -5,6 +5,15 @@ body{
   margin: 0;
   @include sitePadding($body:true);
   color:$main;
+  //sticky footer
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+//sticky footer
+main{
+  flex:1;
 }
 
 pre{

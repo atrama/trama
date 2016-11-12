@@ -10,4 +10,4 @@ categories:
   - Jekyll
   - Personal
 ---
-Today I&#8217;m switching my site over to [Jekyll](https://jekyllrb.com/). I&#8217;ve done a couple small Jekyll projects, but never a full blog and portfolio. And it will have updated projects, since this site hasn&#8217;t been updated in years. Plus I&#8217;m hoping to incorporate some posts my house&#8217;s remodel to show where my time has gone the last 2 years. Updates to come&#8230;
+Today I&#8217;m switching my site over to [Jekyll](https://jekyllrb.com/). I&#8217;ve done a couple small Jekyll projects, but never a full blog and portfolio. And it will have updated projects, since this site hasn&#8217;t been updated in years. Plus, I&#8217;m hoping to incorporate some posts about my house&#8217;s remodel to show where my time has gone the last 2 years. Updates to come&#8230;

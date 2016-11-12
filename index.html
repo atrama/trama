@@ -4,19 +4,25 @@ layout: default
 
   <section class="about">
     <figure>
-      <img src="images/trama.jpg" alt="Anthony Trama"/>
+      <picture>
+        <source srcset="img/trama.webp" type="image/webp" />
+        <img src="img/trama.jpg" alt="Anthony Trama"/>
+      </picture>
     </figure>
 
     <h1>Hi, I'm Anthony</h1>
     <div class="content">
-      <p>I'm web developer living in San Diego and I've been designing sites, print, and shirts for over about 15 years, but my focus has shifting primarily to the web.</p>
-      <p>When I'm not writing code, I'm usually reomodeling my house with my wife or trying to wear out our 2 year old lab, Sonny. Oh, and I eat at least one cheeseburger every week. Take a look at my latest work, what I'm writing, or just say hi".</p>
+      <p>I'm a developer living in San Diego and have been making websites for over 15 years. I started as a designer / developer, but my focus shifted primarily toward development some years ago.</p>
+      <p>When I'm not writing code, I'm usually remodeling my house with my wife, or trying to wear out our 2 year old lab, Sonny. Oh, and I eat at least one cheeseburger every week. Take a look at my latest <a href="https://github.com/{{ site.github_username }}" title="github">work</a>, what I'm <a href="blog">writing</a>, or just <a href="#contact">say "hi"</a>.</p>
     </div>
   </section>
 
 <section class="postCont">
   <div class="headingCont">
-    <h1>Recent Posts</h1>    
+    <h1>Recent Posts</h1>
+    <div class="allPosts">
+      <a href="/blog">=> All posts</a>
+    </div>
   </div>
   <div class="posts">
     {% for post in site.posts limit:3 %}

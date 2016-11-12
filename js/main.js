@@ -3,7 +3,7 @@ var contactForm = document.getElementById('contactForm');
 try {
   contactForm.addEventListener('submit', sendContact, false);
 }catch(e){
-  //do nothing if no contactForm 
+  //do nothing if no contactForm
 }
 
 function sendContact(e){
@@ -18,14 +18,15 @@ function sendContact(e){
   //req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   var data = new FormData();
 
-  for(var inp of inputs){
+  for (let i = 0; i<inputs.length; i++) {
+    let inp = inputs[i];
     //e.g. ('name', 'bob')
     data.append(inp.attributes.id.nodeValue, inp.value);
   }
 
   req.onreadystatechange = function(){
     var resText;
-    var contactErr = document.getElementById('contactErr')
+    var contactErr = document.getElementById('contactErr');
 
     if(req.readyState === 4){
       if(req.status === 200){
@@ -37,7 +38,6 @@ function sendContact(e){
         resText = (JSON.parse(req.responseText)).error;
         contactErr.textContent = 'Sorry, but there\'s an error. ' + resText;
         contactForm.classList.add('hasError');
-        console.log(2);
       }
     }
   };
