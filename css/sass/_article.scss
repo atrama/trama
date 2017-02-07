@@ -76,6 +76,12 @@ article{
   font-size:.85rem;
 }
 
+picture,
+img{
+  max-width: 100%;
+  padding-top:1rem;
+}
+
 .featuredImage{
   height:30vh;
   width: 100vw;
