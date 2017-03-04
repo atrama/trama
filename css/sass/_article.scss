@@ -18,6 +18,12 @@
     @include mq($size:lg){
       padding:.75rem 1rem;
     }
+
+    picture,
+    img{
+      max-width: 100%;
+      padding-top:1rem;
+    }
   }
 
   article h1{
@@ -74,12 +80,6 @@ article{
   margin-top: .25rem;
   font-weight: 300;
   font-size:.85rem;
-}
-
-picture,
-img{
-  max-width: 100%;
-  padding-top:1rem;
 }
 
 .featuredImage{
