@@ -1,0 +1,8 @@
+.asset-cache
+.htaccess
+_site
+.sass-cache
+.jekyll-metadata
+node_modules
+img
+_drafts
