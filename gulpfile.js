@@ -40,10 +40,10 @@ gulp.task('buildJs', function(cb) {
 });
 
 gulp.task('imageMin', function(){
-	return gulp.src('images/*')
+	return gulp.src('images/**/*')
 	.pipe(imagemin())
 	.pipe(gulp.dest('img'))
-	.pipe(webp())
+	.pipe(webp({quality:60}))
 	.pipe(gulp.dest('img'));
 });
 
@@ -67,7 +67,6 @@ gulp.task('css', function(){
 			 		browsers: ['last 2 versions']
 	 			})])
 	 		)
-//			.pipe(gulp.dest('./css/.'))
 			.pipe(gulp.dest('./_assets/css/.'))
 		 .pipe(livereload({ start: true }));
 });
