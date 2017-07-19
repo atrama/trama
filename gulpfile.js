@@ -67,8 +67,9 @@ gulp.task('css', function(){
 			 		browsers: ['last 2 versions']
 	 			})])
 	 		)
+			.pipe(sourcemaps.write())
 			.pipe(gulp.dest('./_assets/css/.'))
-		 .pipe(livereload({ start: true }));
+		 .pipe(livereload());
 });
 
 gulp.task("stylesheets", function() {
@@ -80,7 +81,7 @@ gulp.task("stylesheets", function() {
 });
 
 gulp.task('watch', function(){
-	livereload.listen({start:true}),
+	livereload.listen(),
 	gulp.watch('css/sass/*.scss', ['css']);
 	gulp.watch('js/*.js', ['buildJs']);
 });
