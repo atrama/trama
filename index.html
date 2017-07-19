@@ -5,8 +5,8 @@ layout: default
   <section class="about">
     <figure>
       <picture>
-        <source srcset="img/trama.webp" type="image/webp" />
-        <img src="img/trama.jpg" alt="Anthony Trama"/>
+        <source srcset="img/trama.webp" type="image/webp" >
+        <img src="img/trama.jpg" alt="Anthony Trama">
       </picture>
     </figure>
 
@@ -28,6 +28,18 @@ layout: default
     {% for post in site.posts limit:3 %}
     <article>
       <h1><a href="{{post.url}}">{{post.title}}</a></h1>
+      {% if post.image %}
+      <a href="{{post.url}}">
+        <figure class="featuredImagePreview">
+          <picture>
+            <source srcset="{{post.imagesrc}}Md.webp" media="(min-width: 1101px)" type="image/webp" >
+            <source srcset="{{post.imagesrc}}Md.jpg" media="(min-width: 1101px)" >
+            <source srcset="{{post.imagesrc}}.webp" type="image/webp">
+            <img src="{{post.imagesrc}}.jpg" alt="{{post.imagealt}}">
+          </picture>
+        </figure>
+      </a>
+      {% endif %}
       <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
         {{post.excerpt}}
         <a href="{{post.url}}">Continue reading...</a>
