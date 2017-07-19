@@ -54,9 +54,7 @@ gulp.task('css', function(){
 		// nested
 	];
 	return gulp.src('./css/sass/main.scss')
-		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
-		.pipe(sourcemaps.write())
 		.pipe(
 			gulp.dest('./css/src')
 		)
@@ -67,7 +65,6 @@ gulp.task('css', function(){
 			 		browsers: ['last 2 versions']
 	 			})])
 	 		)
-			.pipe(sourcemaps.write())
 			.pipe(gulp.dest('./_assets/css/.'))
 		 .pipe(livereload());
 });
