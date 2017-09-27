@@ -20,6 +20,10 @@ pre{
   padding:1rem;
   background: $main;
   color:$gray;
+  code{
+    padding:0;
+    background: transparent;
+  }
 }
 
 code{
@@ -29,4 +33,22 @@ code{
 
 li{
   padding-bottom: .25rem;
+}
+
+figure{
+  margin:0
+}
+
+figcaption{
+  padding: 1rem;
+  font-size:.85rem;
+  color:$mainLight;
+  font-style: italic;
+  @include mq($size:sm){
+    padding:1rem 5rem;
+  }
+}
+
+img{
+  max-width: 100%;
 }

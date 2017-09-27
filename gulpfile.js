@@ -69,14 +69,6 @@ gulp.task('css', function(){
 		 .pipe(livereload());
 });
 
-gulp.task("stylesheets", function() {
-  gulp.src("./css/main.css")
-    .pipe(cssnext({
-				browsers:['last 2 versions']
-    }))
-    .pipe(gulp.dest("./css/main2"))
-});
-
 gulp.task('watch', function(){
 	livereload.listen(),
 	gulp.watch('css/sass/*.scss', ['css']);

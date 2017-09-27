@@ -45,6 +45,9 @@ pre {
   padding: 1rem;
   background: #2E3532;
   color: #d8dadf; }
+  pre code {
+    padding: 0;
+    background: transparent; }
 
 code {
   padding: 0 .25rem;
@@ -52,6 +55,21 @@ code {
 
 li {
   padding-bottom: .25rem; }
+
+figure {
+  margin: 0; }
+
+figcaption {
+  padding: 1rem;
+  font-size: .85rem;
+  color: #9eaba5;
+  font-style: italic; }
+  @media (min-width: 701px) {
+    figcaption {
+      padding: 1rem 5rem; } }
+
+img {
+  max-width: 100%; }
 
 body > header {
   margin: .5rem 0 0;
