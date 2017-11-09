@@ -1,8 +1,36 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
 
-  <section class="about">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Anthony Trama</title>
+  <meta name="description" content="I want to make the web experience better.
+">
+
+  <link type="text/css" rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://anthonytrama.com//">
+  <link rel="alternate" type="application/rss+xml" title="Anthony Trama" href="http://anthonytrama.com//feed.xml">
+</head>
+
+
+  <body>
+
+    <header>
+	    <h1><a href="/">Anthony Trama</a></h1>
+
+			<nav class="mainNav">
+			    <!-- <a class="navScroll" data-nav="workLink" href="#work">Work</a>-->
+			    <a href="/blog">Writing</a>
+			    <a href="/#contact">Contact</a>
+			</nav>
+</header>
+
+
+    <main>
+        <section class="about">
     <figure>
       <picture>
         <source srcset="img/trama.webp" type="image/webp" >
@@ -13,7 +41,7 @@ layout: default
     <h1>Hi, I'm Anthony</h1>
     <div class="content">
       <p>I'm a developer living in San Diego and have been making websites for over 15 years. I started as a designer / developer, but my focus shifted primarily toward development years ago.</p>
-      <p>When I'm not writing code, I'm usually remodeling my house with my wife, <del>traveling (the picture of me was taken in Lucerne, Switzerland)</del> chasing my son around, or spending my Sundays <del>watching the Steelers</del> trying to wear out our 3 year old lab, Sonny. Hey, priorities change...but I still eat at least one cheeseburger every week. Take a look at my latest <a href="https://github.com/{{ site.github_username }}" title="github">work</a>, what I'm <a href="blog">writing</a>, or just <a href="#contact">say "hi"</a>.</p>
+      <p>When I'm not writing code, I'm usually remodeling my house with my wife, <del>traveling (the picture of me was taken in Lucerne, Switzerland)</del> chasing my son around, or spending my Sundays <del>watching the Steelers</del> trying to wear out our 3 year old lab, Sonny. Hey, priorities change...but I still eat at least one cheeseburger every week. Take a look at my latest <a href="https://github.com/atrama" title="github">work</a>, what I'm <a href="blog">writing</a>, or just <a href="#contact">say "hi"</a>.</p>
     </div>
   </section>
 
@@ -25,26 +53,36 @@ layout: default
     </div>
   </div>
   <div class="posts">
-    {% for post in site.posts limit:3 %}
+    
     <article>
-      <h1><a href="{{post.url}}">{{post.title}}</a></h1>
-      {% if post.image %}
-      <a href="{{post.url}}">
-        <figure class="featuredImagePreview">
-          <picture>
-            <source srcset="{{post.imagesrc}}Md.webp" media="(min-width: 1101px)" type="image/webp" >
-            <source srcset="{{post.imagesrc}}Md.jpg" media="(min-width: 1101px)" >
-            <source srcset="{{post.imagesrc}}.webp" type="image/webp">
-            <img src="{{post.imagesrc}}.jpg" alt="{{post.imagealt}}">
-          </picture>
-        </figure>
-      </a>
-      {% endif %}
-      <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        {{post.excerpt}}
-        <a href="{{post.url}}">Continue reading...</a>
+      <h1><a href="/2016/11/15/the-new-site/">The new site</a></h1>
+      
+      <span class="post-meta">Nov 15, 2016</span>
+        <p>The new site is finally done! It’s actually been done for a few months now, but my 11 week old son has sort of thrown a wrench into side projects. If you’re not familiar with Jekyll, it’s a static site generator. Meaning, instead of having a bunch of layouts and config files that run server-side when the user visits your page (which takes time), you compile everything in your dev environment, then ship it to production. So yes, you have a bunch of HTML files, but you only manage a handful of layouts and Jekyll does the job of compiling all those HTML files before you deploy. And all the server has to do, is spit out plain HTML. No server-side processing required. There were a number of reasons I moved from WordPress to Jekyll, namely:</p>
+
+
+        <a href="/2016/11/15/the-new-site/">Continue reading...</a>
     </article>
-    {% endfor %}
+    
+    <article>
+      <h1><a href="/2016/05/16/onward-to-jekyll/">On to Jekyll!</a></h1>
+      
+      <span class="post-meta">May 16, 2016</span>
+        <p>Today I’m switching my site over to <a href="https://jekyllrb.com/">Jekyll</a>. I’ve done a couple small Jekyll projects, but never a full blog and portfolio. And it will have updated projects, since this site hasn’t been updated in years. Plus, I’m hoping to incorporate some posts about my house’s remodel to show where my time has gone the last 2 years. Updates to come…</p>
+
+        <a href="/2016/05/16/onward-to-jekyll/">Continue reading...</a>
+    </article>
+    
+    <article>
+      <h1><a href="/2016/05/16/so-youre-starting-work-as-a-web-developer/">So you&#8217;re starting work as a web developer?</a></h1>
+      
+      <span class="post-meta">May 16, 2016</span>
+        <p>When I started one of my jobs, I had to attend an orientation that featured a panel of rising stars at the company who were there to give advice on how to succeed at the company. Every panelist offered “work hard” as their advice to success. If they needed to tell me to work hard to succeed at my new job, they had already failed at their hiring choice. “Work hard” is the upfront advice equivalent to “try harder” after somebody makes an honest mistake.</p>
+
+
+        <a href="/2016/05/16/so-youre-starting-work-as-a-web-developer/">Continue reading...</a>
+    </article>
+    
   </div>
 </section>
 
@@ -57,21 +95,27 @@ layout: default
     <h1>Say Hey!</h1>
     <div class="contactOpts">
       <ul class="socialMedia">
-        {% if site.github_username %}
+        
         <li>
-          {% include icon-github.html username=site.github_username %}
+          <a href="https://github.com/atrama" title="github"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">atrama</span></a>
+
         </li>
-        {% endif %}
+        
 
         <li>
-          {% include icon-codepen.html username="atrama"%}
+          <a href="http://codepen.io/atrama" title="codepen"><span class="icon icon--codepen"><svg viewBox="0 0 120 120"><path class="outer-ring" d="M60.048 0C26.884 0 0 26.9 0 60.048s26.884 60 60 60.047c33.163 0 60.047-26.883 60.047-60.047 S93.211 0 60 0z M60.048 110.233c-27.673 0-50.186-22.514-50.186-50.186S32.375 9.9 60 9.9 c27.672 0 50.2 22.5 50.2 50.186S87.72 110.2 60 110.233z"/><path class="inner-box" d="M97.147 48.319c-0.007-0.047-0.019-0.092-0.026-0.139c-0.016-0.09-0.032-0.18-0.056-0.268 c-0.014-0.053-0.033-0.104-0.05-0.154c-0.025-0.078-0.051-0.156-0.082-0.232c-0.021-0.053-0.047-0.105-0.071-0.156 c-0.033-0.072-0.068-0.143-0.108-0.211c-0.029-0.051-0.061-0.1-0.091-0.148c-0.043-0.066-0.087-0.131-0.135-0.193 c-0.035-0.047-0.072-0.094-0.109-0.139c-0.051-0.059-0.104-0.117-0.159-0.172c-0.042-0.043-0.083-0.086-0.127-0.125 c-0.059-0.053-0.119-0.104-0.181-0.152c-0.048-0.037-0.095-0.074-0.145-0.109c-0.019-0.012-0.035-0.027-0.053-0.039L61.817 23.5 c-1.072-0.715-2.468-0.715-3.54 0L24.34 46.081c-0.018 0.012-0.034 0.027-0.053 0.039c-0.05 0.035-0.097 0.072-0.144 0.1 c-0.062 0.049-0.123 0.1-0.181 0.152c-0.045 0.039-0.086 0.082-0.128 0.125c-0.056 0.055-0.108 0.113-0.158 0.2 c-0.038 0.045-0.075 0.092-0.11 0.139c-0.047 0.062-0.092 0.127-0.134 0.193c-0.032 0.049-0.062 0.098-0.092 0.1 c-0.039 0.068-0.074 0.139-0.108 0.211c-0.024 0.051-0.05 0.104-0.071 0.156c-0.031 0.076-0.057 0.154-0.082 0.2 c-0.017 0.051-0.035 0.102-0.05 0.154c-0.023 0.088-0.039 0.178-0.056 0.268c-0.008 0.047-0.02 0.092-0.025 0.1 c-0.019 0.137-0.029 0.275-0.029 0.416V71.36c0 0.1 0 0.3 0 0.418c0.006 0 0 0.1 0 0.1 c0.017 0.1 0 0.2 0.1 0.268c0.015 0.1 0 0.1 0.1 0.154c0.025 0.1 0.1 0.2 0.1 0.2 c0.021 0.1 0 0.1 0.1 0.154c0.034 0.1 0.1 0.1 0.1 0.213c0.029 0 0.1 0.1 0.1 0.1 c0.042 0.1 0.1 0.1 0.1 0.193c0.035 0 0.1 0.1 0.1 0.139c0.05 0.1 0.1 0.1 0.2 0.2 c0.042 0 0.1 0.1 0.1 0.125c0.058 0.1 0.1 0.1 0.2 0.152c0.047 0 0.1 0.1 0.1 0.1 c0.019 0 0 0 0.1 0.039L58.277 96.64c0.536 0.4 1.2 0.5 1.8 0.537c0.616 0 1.233-0.18 1.77-0.537 l33.938-22.625c0.018-0.012 0.034-0.027 0.053-0.039c0.05-0.035 0.097-0.072 0.145-0.109c0.062-0.049 0.122-0.1 0.181-0.152 c0.044-0.039 0.085-0.082 0.127-0.125c0.056-0.055 0.108-0.113 0.159-0.172c0.037-0.045 0.074-0.09 0.109-0.139 c0.048-0.062 0.092-0.127 0.135-0.193c0.03-0.049 0.062-0.098 0.091-0.146c0.04-0.07 0.075-0.141 0.108-0.213 c0.024-0.051 0.05-0.102 0.071-0.154c0.031-0.078 0.057-0.156 0.082-0.234c0.017-0.051 0.036-0.102 0.05-0.154 c0.023-0.088 0.04-0.178 0.056-0.268c0.008-0.045 0.02-0.092 0.026-0.137c0.018-0.139 0.028-0.277 0.028-0.418V48.735 C97.176 48.6 97.2 48.5 97.1 48.319z M63.238 32.073l25.001 16.666L77.072 56.21l-13.834-9.254V32.073z M56.856 32.1 v14.883L43.023 56.21l-11.168-7.471L56.856 32.073z M29.301 54.708l7.983 5.34l-7.983 5.34V54.708z M56.856 88.022L31.855 71.4 l11.168-7.469l13.833 9.252V88.022z M60.048 67.597l-11.286-7.549l11.286-7.549l11.285 7.549L60.048 67.597z M63.238 88.022V73.14 l13.834-9.252l11.167 7.469L63.238 88.022z M90.794 65.388l-7.982-5.34l7.982-5.34V65.388z"/></svg>
+</span><span class="username">atrama</span></a>
+
         </li>
 
-        {% if site.twitter_username %}
+        
         <li>
-          {% include icon-twitter.html username=site.twitter_username %}
+          <a href="https://twitter.com/aftrama" title="twitter"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">aftrama</span></a>
+
         </li>
-        {% endif %}
+        
       </ul>
 
       <form id="contactForm">
@@ -100,3 +144,42 @@ layout: default
   </section>
   <div class="contact-bottom">
   </div>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+
+<h2 class="footerHeading">Anthony Trama</h2>
+<ul class="socialMedia">
+  
+  <li>
+    <a href="https://github.com/atrama" title="github"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">atrama</span></a>
+
+  </li>
+  
+
+  <li>
+    <a href="http://codepen.io/atrama" title="codepen"><span class="icon icon--codepen"><svg viewBox="0 0 120 120"><path class="outer-ring" d="M60.048 0C26.884 0 0 26.9 0 60.048s26.884 60 60 60.047c33.163 0 60.047-26.883 60.047-60.047 S93.211 0 60 0z M60.048 110.233c-27.673 0-50.186-22.514-50.186-50.186S32.375 9.9 60 9.9 c27.672 0 50.2 22.5 50.2 50.186S87.72 110.2 60 110.233z"/><path class="inner-box" d="M97.147 48.319c-0.007-0.047-0.019-0.092-0.026-0.139c-0.016-0.09-0.032-0.18-0.056-0.268 c-0.014-0.053-0.033-0.104-0.05-0.154c-0.025-0.078-0.051-0.156-0.082-0.232c-0.021-0.053-0.047-0.105-0.071-0.156 c-0.033-0.072-0.068-0.143-0.108-0.211c-0.029-0.051-0.061-0.1-0.091-0.148c-0.043-0.066-0.087-0.131-0.135-0.193 c-0.035-0.047-0.072-0.094-0.109-0.139c-0.051-0.059-0.104-0.117-0.159-0.172c-0.042-0.043-0.083-0.086-0.127-0.125 c-0.059-0.053-0.119-0.104-0.181-0.152c-0.048-0.037-0.095-0.074-0.145-0.109c-0.019-0.012-0.035-0.027-0.053-0.039L61.817 23.5 c-1.072-0.715-2.468-0.715-3.54 0L24.34 46.081c-0.018 0.012-0.034 0.027-0.053 0.039c-0.05 0.035-0.097 0.072-0.144 0.1 c-0.062 0.049-0.123 0.1-0.181 0.152c-0.045 0.039-0.086 0.082-0.128 0.125c-0.056 0.055-0.108 0.113-0.158 0.2 c-0.038 0.045-0.075 0.092-0.11 0.139c-0.047 0.062-0.092 0.127-0.134 0.193c-0.032 0.049-0.062 0.098-0.092 0.1 c-0.039 0.068-0.074 0.139-0.108 0.211c-0.024 0.051-0.05 0.104-0.071 0.156c-0.031 0.076-0.057 0.154-0.082 0.2 c-0.017 0.051-0.035 0.102-0.05 0.154c-0.023 0.088-0.039 0.178-0.056 0.268c-0.008 0.047-0.02 0.092-0.025 0.1 c-0.019 0.137-0.029 0.275-0.029 0.416V71.36c0 0.1 0 0.3 0 0.418c0.006 0 0 0.1 0 0.1 c0.017 0.1 0 0.2 0.1 0.268c0.015 0.1 0 0.1 0.1 0.154c0.025 0.1 0.1 0.2 0.1 0.2 c0.021 0.1 0 0.1 0.1 0.154c0.034 0.1 0.1 0.1 0.1 0.213c0.029 0 0.1 0.1 0.1 0.1 c0.042 0.1 0.1 0.1 0.1 0.193c0.035 0 0.1 0.1 0.1 0.139c0.05 0.1 0.1 0.1 0.2 0.2 c0.042 0 0.1 0.1 0.1 0.125c0.058 0.1 0.1 0.1 0.2 0.152c0.047 0 0.1 0.1 0.1 0.1 c0.019 0 0 0 0.1 0.039L58.277 96.64c0.536 0.4 1.2 0.5 1.8 0.537c0.616 0 1.233-0.18 1.77-0.537 l33.938-22.625c0.018-0.012 0.034-0.027 0.053-0.039c0.05-0.035 0.097-0.072 0.145-0.109c0.062-0.049 0.122-0.1 0.181-0.152 c0.044-0.039 0.085-0.082 0.127-0.125c0.056-0.055 0.108-0.113 0.159-0.172c0.037-0.045 0.074-0.09 0.109-0.139 c0.048-0.062 0.092-0.127 0.135-0.193c0.03-0.049 0.062-0.098 0.091-0.146c0.04-0.07 0.075-0.141 0.108-0.213 c0.024-0.051 0.05-0.102 0.071-0.154c0.031-0.078 0.057-0.156 0.082-0.234c0.017-0.051 0.036-0.102 0.05-0.154 c0.023-0.088 0.04-0.178 0.056-0.268c0.008-0.045 0.02-0.092 0.026-0.137c0.018-0.139 0.028-0.277 0.028-0.418V48.735 C97.176 48.6 97.2 48.5 97.1 48.319z M63.238 32.073l25.001 16.666L77.072 56.21l-13.834-9.254V32.073z M56.856 32.1 v14.883L43.023 56.21l-11.168-7.471L56.856 32.073z M29.301 54.708l7.983 5.34l-7.983 5.34V54.708z M56.856 88.022L31.855 71.4 l11.168-7.469l13.833 9.252V88.022z M60.048 67.597l-11.286-7.549l11.286-7.549l11.285 7.549L60.048 67.597z M63.238 88.022V73.14 l13.834-9.252l11.167 7.469L63.238 88.022z M90.794 65.388l-7.982-5.34l7.982-5.34V65.388z"/></svg>
+</span><span class="username">atrama</span></a>
+
+  </li>
+
+  
+  <li>
+    <a href="https://twitter.com/aftrama" title="twitter"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">aftrama</span></a>
+
+  </li>
+  
+</ul>
+</footer>
+<script type="text/javascript" src="/assets/main.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic|Merriweather:400,700,300,400italic' rel='stylesheet' type='text/css'>
+
+
+  </body>
+
+</html>

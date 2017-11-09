@@ -1,0 +1,34 @@
+#!/bin/bash
+echo "starting cibuidl"
+# skip if build is triggered by pull request
+if [ $TRAVIS_PULL_REQUEST == "true" ]; then
+  echo "this is PR, exiting"
+  exit 0
+fi
+
+echo "setting -e"
+# enable error reporting to the console
+set -e
+
+echo "remove and add _site"
+# cleanup "_site"
+rm -rf _site
+mkdir _site
+
+echo "git clone"
+# clone remote repo to "_site"
+git clone https://${GH_TOKEN}@github.com/atrama/trama.git --branch gh-pages _site
+
+echo "bundle installing"
+# build with Jekyll into "_site"
+bundle install
+echo "build"
+bundle exec jekyll build
+
+# push
+cd _site
+git config user.email "aftrama@gmail.com"
+git config user.name "atrama"
+git add --all
+git commit -a -m "Travis #$TRAVIS_BUILD_NUMBER"
+git push --force origin gh-pages

@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Anthony Trama</title>
-  <meta name="description" content="I want to make the web experience better.
-">
+  <title>The new site</title>
+  <meta name="description" content="The new site is finally done! It’s actually been done for a few months now, but my 11 week old son has sort of thrown a wrench into side projects. If you’re ...">
 
   <link type="text/css" rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://anthonytrama.com//404.html">
+  <link rel="canonical" href="http://anthonytrama.com//2016/11/15/the-new-site/">
   <link rel="alternate" type="application/rss+xml" title="Anthony Trama" href="http://anthonytrama.com//feed.xml">
 </head>
 
@@ -30,13 +29,52 @@
 
 
     <main>
-      <h1>That page you're looking for?</h1>
-<p>
-  It's not here. Maybe it went to website heaven. Or a farm where it gets to play with other pages all day.
-</p>
-<p>
-  In the mean time, try going back <a href="/">home</a> or <a href="/#contact">contact me</a> and let me know how you got here, so I can fix it.
-</p>
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">The new site</h1>
+    <p class="post-meta"><time datetime="November 15, 2016" itemprop="datePublished">November 15, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>The new site is finally done! It’s actually been done for a few months now, but my 11 week old son has sort of thrown a wrench into side projects. If you’re not familiar with Jekyll, it’s a static site generator. Meaning, instead of having a bunch of layouts and config files that run server-side when the user visits your page (which takes time), you compile everything in your dev environment, then ship it to production. So yes, you have a bunch of HTML files, but you only manage a handful of layouts and Jekyll does the job of compiling all those HTML files before you deploy. And all the server has to do, is spit out plain HTML. No server-side processing required. There were a number of reasons I moved from WordPress to Jekyll, namely:</p>
+
+<ul>
+  <li>There’s no database and, thus, nothing to hack.</li>
+  <li>It’s incredibly easy to get started with.</li>
+  <li>In order to really do WordPress right, you need to dedicate yourself to WordPress development. I’d rather focus on JavaScript myself.</li>
+  <li>Honestly, saying you use WordPress just sounds dirty now. Unless you happen to be a WordPress developer.</li>
+  <li>It’s <em>super</em> fast (more about that below).</li>
+</ul>
+
+<picture>
+  <source srcset="/img/2016_11_site_old.webp" type="image/webp" />
+  <img src="/img/2016_11_site_old.png" alt="Old Site Network Requests" />
+</picture>
+<p>Looking at my old WordPress site (homepage), you can see that it had a payload of 513KB and took 2.42 seconds to load. Not terrible, but there was certainly room for improvement. It also made 24 requests; partially because the site was about 5 years old and didn’t bundle assets the way it could have.</p>
+
+<picture>
+  <source srcset="/img/2016_11_site_new.webp" type="image/webp" />
+  <img src="/img/2016_11_site_new.png" alt="New Site Network Requests" />
+</picture>
+<p>The new site’s payload is about 20% the size of the old site and loads in less than half a second. There are half the amount of requests and the content (not including images) is actually ready after less than a quarter of a second! Unlike WordPress, Jekyll does not have a database to look up, so your blog content is there <em>muuuccchh</em> faster.</p>
+
+<p>So what else enabled the site to pick up speed? Admittedly, changing the framework took care of a lot, but there are a lot of easy steps anyone can take. And speaking as somebody who looks at a lot of portfolio sites, most developers are not doing these items:</p>
+
+<ul>
+  <li>Bundle assets. I could have gone farther by loading critical CSS in the HTML (and probably will).</li>
+  <li>Change images to use <code class="highlighter-rouge">webp</code> or <code class="highlighter-rouge">svg</code> and combine these formats with the <code class="highlighter-rouge">&lt;picture&gt;</code> element and <code class="highlighter-rouge">srcset</code> attributes.</li>
+  <li>Don’t let today’s trends trap you tomorrow. I’m really excited by the fact that my articles are just plain markdown, which means they’re compiled to plain HTML. No nested <code class="highlighter-rouge">div</code>s to make a parallax or carousel animation in an article. Just content.</li>
+  <li>Think about which assets you really needs. Really, this is a blog and portfolio site.</li>
+  <li>Add cool features that are actually useful. My next feature? Using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API">Notifications API </a> to display notifications when a new post is added.</li>
+</ul>
+
+<p>There are still a lot of changes I want to make. Adding a link to recent work is a big one. So is writing more. But for now, I’m also enjoying coming home and playing with my son, as well as working on the house. So progress might be slow. And I’m totally fine with that.</p>
+
+  </div>
+
+</article>
 
     </main>
 

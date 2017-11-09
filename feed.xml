@@ -1,30 +1,427 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Anthony Trama</title>
+    <description>I want to make the web experience better.
+</description>
+    <link>http://anthonytrama.com//</link>
+    <atom:link href="http://anthonytrama.com//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 09 Nov 2017 04:16:48 +0000</pubDate>
+    <lastBuildDate>Thu, 09 Nov 2017 04:16:48 +0000</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>The new site</title>
+        <description>&lt;p&gt;The new site is finally done! It’s actually been done for a few months now, but my 11 week old son has sort of thrown a wrench into side projects. If you’re not familiar with Jekyll, it’s a static site generator. Meaning, instead of having a bunch of layouts and config files that run server-side when the user visits your page (which takes time), you compile everything in your dev environment, then ship it to production. So yes, you have a bunch of HTML files, but you only manage a handful of layouts and Jekyll does the job of compiling all those HTML files before you deploy. And all the server has to do, is spit out plain HTML. No server-side processing required. There were a number of reasons I moved from WordPress to Jekyll, namely:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There’s no database and, thus, nothing to hack.&lt;/li&gt;
+  &lt;li&gt;It’s incredibly easy to get started with.&lt;/li&gt;
+  &lt;li&gt;In order to really do WordPress right, you need to dedicate yourself to WordPress development. I’d rather focus on JavaScript myself.&lt;/li&gt;
+  &lt;li&gt;Honestly, saying you use WordPress just sounds dirty now. Unless you happen to be a WordPress developer.&lt;/li&gt;
+  &lt;li&gt;It’s &lt;em&gt;super&lt;/em&gt; fast (more about that below).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+  &lt;source srcset=&quot;/img/2016_11_site_old.webp&quot; type=&quot;image/webp&quot; /&gt;
+  &lt;img src=&quot;/img/2016_11_site_old.png&quot; alt=&quot;Old Site Network Requests&quot; /&gt;
+&lt;/picture&gt;
+&lt;p&gt;Looking at my old WordPress site (homepage), you can see that it had a payload of 513KB and took 2.42 seconds to load. Not terrible, but there was certainly room for improvement. It also made 24 requests; partially because the site was about 5 years old and didn’t bundle assets the way it could have.&lt;/p&gt;
+
+&lt;picture&gt;
+  &lt;source srcset=&quot;/img/2016_11_site_new.webp&quot; type=&quot;image/webp&quot; /&gt;
+  &lt;img src=&quot;/img/2016_11_site_new.png&quot; alt=&quot;New Site Network Requests&quot; /&gt;
+&lt;/picture&gt;
+&lt;p&gt;The new site’s payload is about 20% the size of the old site and loads in less than half a second. There are half the amount of requests and the content (not including images) is actually ready after less than a quarter of a second! Unlike WordPress, Jekyll does not have a database to look up, so your blog content is there &lt;em&gt;muuuccchh&lt;/em&gt; faster.&lt;/p&gt;
+
+&lt;p&gt;So what else enabled the site to pick up speed? Admittedly, changing the framework took care of a lot, but there are a lot of easy steps anyone can take. And speaking as somebody who looks at a lot of portfolio sites, most developers are not doing these items:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bundle assets. I could have gone farther by loading critical CSS in the HTML (and probably will).&lt;/li&gt;
+  &lt;li&gt;Change images to use &lt;code class=&quot;highlighter-rouge&quot;&gt;webp&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;svg&lt;/code&gt; and combine these formats with the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;picture&amp;gt;&lt;/code&gt; element and &lt;code class=&quot;highlighter-rouge&quot;&gt;srcset&lt;/code&gt; attributes.&lt;/li&gt;
+  &lt;li&gt;Don’t let today’s trends trap you tomorrow. I’m really excited by the fact that my articles are just plain markdown, which means they’re compiled to plain HTML. No nested &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt;s to make a parallax or carousel animation in an article. Just content.&lt;/li&gt;
+  &lt;li&gt;Think about which assets you really needs. Really, this is a blog and portfolio site.&lt;/li&gt;
+  &lt;li&gt;Add cool features that are actually useful. My next feature? Using the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API&quot;&gt;Notifications API &lt;/a&gt; to display notifications when a new post is added.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are still a lot of changes I want to make. Adding a link to recent work is a big one. So is writing more. But for now, I’m also enjoying coming home and playing with my son, as well as working on the house. So progress might be slow. And I’m totally fine with that.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Nov 2016 00:00:00 +0000</pubDate>
+        <link>http://anthonytrama.com//2016/11/15/the-new-site/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2016/11/15/the-new-site/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>Personal</category>
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>On to Jekyll!</title>
+        <description>&lt;p&gt;Today I’m switching my site over to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;. I’ve done a couple small Jekyll projects, but never a full blog and portfolio. And it will have updated projects, since this site hasn’t been updated in years. Plus, I’m hoping to incorporate some posts about my house’s remodel to show where my time has gone the last 2 years. Updates to come…&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 May 2016 02:58:36 +0000</pubDate>
+        <link>http://anthonytrama.com//2016/05/16/onward-to-jekyll/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2016/05/16/onward-to-jekyll/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>Personal</category>
+        
+      </item>
+    
+      <item>
+        <title>So you&amp;#8217;re starting work as a web developer?</title>
+        <description>&lt;p&gt;When I started one of my jobs, I had to attend an orientation that featured a panel of rising stars at the company who were there to give advice on how to succeed at the company. Every panelist offered “work hard” as their advice to success. If they needed to tell me to work hard to succeed at my new job, they had already failed at their hiring choice. “Work hard” is the upfront advice equivalent to “try harder” after somebody makes an honest mistake.&lt;/p&gt;
+
+&lt;p&gt;My first job out of college started a little different. I was given a piece of advice day one and I still remember it to this day. One of the directors called me into their office. Now, keep in mind that two months before this day, I was living in a fraternity house with 12 other guys. Now I was working in an office not much larger, but with almost all women, many of whom were old enough to be my mom. I was raised to respect your elders and say yes. My new colleague, was quick to point out “listen, I and many of the other people here are old enough to be your parents and it’s good to have respect, but don’t ever feel like you can’t say no. You have a job to do and you need to be fair and responsible to that role.” It was hard to do, but there’s no question that it made me a better employee. “Work hard,” “be nice,” and “show up early” are all great pieces of advice, but I’m a fan of more off-beat advice. It has helped me in my career, so here’s my advice to people starting out in web development; which can really be used in any field.&lt;/p&gt;
+
+&lt;h2 id=&quot;somebody-brought-donuts-grab-one-then-bring-them-in-next-time&quot;&gt;Somebody brought donuts, grab one. Then bring them in next time&lt;/h2&gt;
+
+&lt;p&gt;Seriously, go for it. But don’t take 2 until later in the day when everyone has had a chance to get some. You might be a starving, not so far removed from being a college student employee or intern, and your colleagues probably know that, but show them that first and foremost you’re a professional. Next week, bring in donuts, make brownies, buy some bags of chips, do something to show you’re a part of the team. Especially if you’re an intern. Do you know how often interns bring things in? Not very often. Do you know how much they stand out when they do it? A lot. You’re likely auditioning for a job, why not do something small to stand out?&lt;/p&gt;
+
+&lt;h2 id=&quot;volunteer-to-be-challenged&quot;&gt;Volunteer to be challenged&lt;/h2&gt;
+
+&lt;p&gt;On a scale of 1-10, you’re a 4 as a developer. Volunteer the next time a project is 5 in terms of difficulty. Don’t volunteer for the 9, that’s just stupid. Baby steps.&lt;/p&gt;
+
+&lt;p&gt;Also, freelance on the side or create a side project. You are hopefully learning a lot on the job, but learn something (a framework, tool, etc.) outside of your team’s stack and you just might be able to be the person who already has a head start if the team has an opportunity for it.&lt;/p&gt;
+
+&lt;h2 id=&quot;pretend-you-care-about-the-boring-adults&quot;&gt;Pretend you care about the boring adults&lt;/h2&gt;
+
+&lt;p&gt;You know how I know my tales of home improvement and 90’s era TV references are boring? Because not long ago, I listed to people a decade or two older than me talk about their life and thought some of it sounded boring. But you’ll make a connection with them and learn some life lessons outside of work. You might just wind up being friends!&lt;/p&gt;
+
+&lt;h2 id=&quot;youre-failing-tell-your-boss&quot;&gt;You’re failing. Tell your boss&lt;/h2&gt;
+
+&lt;p&gt;You know what sucks more than telling your boss you might have bit off more than you can chew before a deadline? Telling your boss after a deadline.&lt;/p&gt;
+
+&lt;p&gt;A good boss will challenge you; and a good employee will challenge themselves. But a good boss will never leave you out to fail. They might ask you if you can write a new project using a framework or concepts you’re not familiar. Don’t say no, accept the challenge and be honest up front. But if you’re not hitting the marks you both expected at a certain point into the project, ask for help. Maybe there’s a senior developer who can mentor you. A good boss will respect your hard work and honesty, because in the end, you’re going to become a better person to work with after learning those new concepts, rather than committing bad code or work-arounds.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 May 2016 02:52:55 +0000</pubDate>
+        <link>http://anthonytrama.com//2016/05/16/so-youre-starting-work-as-a-web-developer/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2016/05/16/so-youre-starting-work-as-a-web-developer/</guid>
+        
+        
+        <category>Industry</category>
+        
+      </item>
+    
+      <item>
+        <title>Removing node_modules in a Jekyll build</title>
+        <description>&lt;p&gt;My &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; build recently slowed down dramatically. Like minutes to build versus a few seconds before. Since Jekyll relies on ruby to watch for changes, then compile all your files into a new _site folder, this made working virtually impossible.&lt;/p&gt;
+
+&lt;p&gt;The fix was simple and obvious (after some confused searching, of course). I recently added gulp to my project’s workflow, which added a ton of node_modules folders. Just open the &lt;a href=&quot;http://jekyllrb.com/docs/configuration/&quot;&gt;_config.yml&lt;/a&gt; file in your site root, exclude those files, and any other folders or files you don’t need to deploy and builds are back to a few seconds!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;exclude: [node_modules, gulpfile.js]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you don’t have a _config.yml file, you can add one.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/06/Screen-Shot-2015-06-28-at-3.16.29-PM.png&quot;&gt;&lt;img class=&quot;alignnone size-full wp-image-627&quot; alt=&quot;Jekyll config exclude settings code&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/06/Screen-Shot-2015-06-28-at-3.16.29-PM.png&quot; width=&quot;551&quot; height=&quot;121&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 28 Jun 2015 22:30:31 +0000</pubDate>
+        <link>http://anthonytrama.com//2015/06/28/removing-node_modules-in-a-jekyll-build/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2015/06/28/removing-node_modules-in-a-jekyll-build/</guid>
+        
+        
+        <category>Gulp</category>
+        
+        <category>JavaScript</category>
+        
+        <category>Jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>3 Easy Features that Enhance the User Experience</title>
+        <description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://assets.codepen.io/assets/embed/ei.js&quot; async=&quot;&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Too many websites focus on looks and trends and miss the mark of good user experience. Fancy animations, hero images, and carousels will all go way of flash, splash pages, and 10px font one day. Making the site easy to use, fast, and intuitive has never gone out of style.&lt;/p&gt;
+
+&lt;p&gt;No doubt, great design enhances the experience and makes the site easier to use, but there are too many features that are here today and ready to be use that are virtually ignored by the sites that could truly benefit from them the most. And the sad part is, it really doesn’t take a lot of effort to start using them.&lt;/p&gt;
+
+&lt;h2 id=&quot;web-storage&quot;&gt;Web Storage&lt;/h2&gt;
+
+&lt;p&gt;I use a lot of sites that are necessary, require frequent visits, and I frankly do not want to spend time on them. I visit my credit card and bank website all the time; it’s not because I have fun on those sites. Every time I sign in, I have to go through the same steps to get to the same information. Want to sort this month’s transactions by amount spent? No problem, just find the dropdowns and change them…every…single…time…you…visit.&lt;/p&gt;
+
+&lt;p&gt;…Or give the user the choice, but remember their last or most frequent choices. But you’re not a back-end developer? Perfect, web storage (sessionStorage, localStorage, indexedDB) are great at doing this!&lt;/p&gt;
+
+&lt;p class=&quot;codepen&quot; data-height=&quot;268&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;azqqPd&quot; data-default-tab=&quot;result&quot; data-user=&quot;atrama&quot;&gt;
+  See the Pen &lt;a href=&quot;https://codepen.io/atrama/pen/azqqPd/&quot;&gt;localStorage Dropdown menu demo&lt;/a&gt; by Anthony Trama (&lt;a href=&quot;https://codepen.io/atrama&quot;&gt;@atrama&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;See how simple that is? It can be as small as a few lines of code. Don’t you wish your bank remembered this for you and you could see everything at a glance without navigating or changing dropdowns every time?&lt;/p&gt;
+
+&lt;p&gt;Support: &lt;a href=&quot;http://caniuse.com/#search=web%20storage&quot;&gt;Almost every &lt;del&gt;mobile&lt;/del&gt; browser and even IE8&lt;/a&gt; (not a typo!).&lt;/p&gt;
+
+&lt;h2 id=&quot;geolocation&quot;&gt;Geolocation&lt;/h2&gt;
+
+&lt;p&gt;I recently booked a trip to Las Vegas to, ahem, only watch March Madness for fun and never walk into the sportsbook. Living in San Diego, I (predictably) wanted to set San Diego as my departure city. Depending on the airline’s website I used, I either had to type the name or select from a drop down list of &lt;em&gt;all&lt;/em&gt; of their cities. Yes, every city they fly out of. A few lines of JavaScript can detect a user’s location. From there, it really isn’t very hard to find the nearest departure city and make the experience 1,304% better. Yes, I did the math.&lt;/p&gt;
+
+&lt;p&gt;Don’t forget to allow access when you’re browser prompts you. &lt;ins&gt;Some browsers now require https to enable geolocation. Open this pen in codepen and change to https to see the feature or view the demos on &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation&quot;&gt;MDN&lt;/a&gt;&lt;/ins&gt;&lt;/p&gt;
+
+&lt;p class=&quot;codepen&quot; data-height=&quot;268&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;gbdLwE&quot; data-default-tab=&quot;result&quot; data-user=&quot;atrama&quot;&gt;
+  See the Pen &lt;a href=&quot;https://codepen.io/atrama/pen/gbdLwE/&quot;&gt;gbdLwE&lt;/a&gt; by Anthony Trama (&lt;a href=&quot;https://codepen.io/atrama&quot;&gt;@atrama&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;True, it’s not the fastest feature, but there are options to make it faster, more/less precise, and you can check the location before the user focuses on the input to make it feel faster. Also, I know geolocation is used on the web today, but it really isn’t used in nearly as many places as it should be.&lt;/p&gt;
+
+&lt;p&gt;Support: &lt;a href=&quot;http://caniuse.com/#feat=geolocation&quot;&gt;Almost every &lt;del&gt;mobile&lt;/del&gt; browser and even IE9&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-the-right-input-type&quot;&gt;Using the right input type&lt;/h2&gt;
+
+&lt;p&gt;As a developer, guy always looking for ways to optimize time, and somebody with fat fingers who still struggles with a touch keyboard, this is one pattern that drives me crazy. It’s so easy to set the pattern or type attribute on an input tag to email, tel (phone), date, etc., which triggers the appropriate keyboard. And if your website’s doctype isn’t HTML5 (seriously though, it’s 2015), it doesn’t matter. The browser will pick it up if it supports the input type. If not, it will just render as text.&lt;/p&gt;
+
+&lt;p&gt;How many custom datepickers have you enjoyed using on your phone? For me, it’s none. The date input type uses the OS datepicker (i.e.: the spinners in iOS). Email and tel give you the right keyboard so you don’t have to switch between letters, symbols, and numbers). There  are a lot more out there, but changing just a couple would probably really improve most forms out there today.&lt;/p&gt;
+
+&lt;div id=&quot;attachment_598&quot; style=&quot;width: 179px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3969.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-598&quot; alt=&quot;screenshot of iOS 8 with a text input.&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3969-169x300.png&quot; width=&quot;169&quot; height=&quot;300&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3969-169x300.png 169w, http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3969.png 640w&quot; sizes=&quot;(max-width: 169px) 100vw, 169px&quot; /&gt;&lt;/a&gt;
+
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    iOS 8 with a text input.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;attachment_597&quot; style=&quot;width: 179px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3970.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-597&quot; alt=&quot;screenshot of iOS 8 with an email input.&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3970-169x300.png&quot; width=&quot;169&quot; height=&quot;300&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3970-169x300.png 169w, http://www.anthonytrama.com/wp-content/uploads/2015/03/IMG_3970.png 640w&quot; sizes=&quot;(max-width: 169px) 100vw, 169px&quot; /&gt;&lt;/a&gt;
+
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    iOS 8 with an email input. Note, the @ symbol and &amp;#8220;.&amp;#8221; &amp;#8211; it gets even better with number and tel inputs types
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p data-height=&quot;268&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;YPJxbr&quot; data-default-tab=&quot;result&quot; data-user=&quot;atrama&quot; class=&quot;codepen&quot;&gt;
+  See the Pen &lt;a href=&quot;https://codepen.io/atrama/pen/YPJxbr/&quot;&gt;YPJxbr&lt;/a&gt; by Anthony Trama (&lt;a href=&quot;https://codepen.io/atrama&quot;&gt;@atrama&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;Support: Depends on the input type, but &lt;a href=&quot;http://caniuse.com/#feat=forms&quot;&gt;almost all modern mobile browsers and desktop browsers updated in the last 3 years&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping Up&lt;/h2&gt;
+
+&lt;p&gt;No, every website does not need all of these. Yes, it would look stupid to ask for the user’s location on your little blog (uh-oh). But think of the common sites you use where you need to enter a location, use different input types, or would just find it useful to have your preference remembered. Chances are, a lot of them don’t use these features.&lt;/p&gt;
+
+&lt;p&gt;And that, is where we’re all being robbed of a great experience. Apps have used these features for a long time, it’s time for HTML and JavaScript developers to catch up if they ever want to be seen on par with native apps.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 12 Mar 2015 04:33:39 +0000</pubDate>
+        <link>http://anthonytrama.com//2015/03/12/3-easy-features-that-enhance-the-user-experience/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2015/03/12/3-easy-features-that-enhance-the-user-experience/</guid>
+        
+        
+        <category>Development</category>
+        
+        <category>Mobile</category>
+        
+      </item>
+    
+      <item>
+        <title>What Is Killing Flat Design?</title>
+        <description>&lt;p&gt;Let me start by saying, I like the flat design trend. And yes, I do believe that it is a trend. Overall, I really liked iOS7 when it came out; and I still like it. There are some apps that I believe have a worse user experience now, such as calendar and contacts (why does the never-used notes section take up so much space above “send message” and “share contact”), but overall I like the design.&lt;/p&gt;
+
+&lt;div id=&quot;attachment_562&quot; style=&quot;width: 179px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2014/03/photo-1.png&quot;&gt;&lt;img src=&quot;http://www.anthonytrama.com/wp-content/uploads/2014/03/photo-1-169x300.png&quot; alt=&quot;ios7 Contacts App - Beef Palace Butcher Shop info&quot; width=&quot;169&quot; height=&quot;300&quot; class=&quot;size-medium wp-image-562&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2014/03/photo-1-169x300.png 169w, http://www.anthonytrama.com/wp-content/uploads/2014/03/photo-1.png 640w&quot; sizes=&quot;(max-width: 169px) 100vw, 169px&quot; /&gt;&lt;/a&gt;
+
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    Clean? Yes. But the notes section, aside from rarely being used, takes up a lot of space, forcing the user to scroll every time they want to send a message or share a contact
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;With that being said, the first dagger in the heart of flat design will be the blind faith in and overuse we well as misuse of flat design. Skeuomorphism isn’t inherently bad; seeing glossy icons in sand and adding an outer glow to everything is. Gradients, textures, and drop shadows still have their place in digital design.&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;
+  &lt;p&gt;
+    I’m just curious. It seems an aesthetic upheld by one fruit-based company is now deemed correct, across everything? Regardless of anything.
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &amp;mdash; Sarah Parmenter (@sazzy) &lt;a href=&quot;https://twitter.com/sazzy/statuses/385409561328619520&quot;&gt;October 2, 2013&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Flat design may just kill itself. I like flat design and I’m glad it’s here. Just as blind allegiance to Apple’s skeumorphic design created an overcrowded gradient and gloss party on the web, which made flat design a breath of fresh air, a “plain” web will one day give rise to some new, correct style of design.&lt;/p&gt;
+
+&lt;p&gt;Let me repeat, I like flat design. But I also liked it when Google was using flat design before iOS7 came out.  Apple didn’t invent flat design, just like they weren’t the first major player with the cloud.&lt;/p&gt;
+
+&lt;p&gt;It’s a shame that such a smart industry changed their mind on good design en masse because of blind faith. That being said, they’re creating some pretty damn good looking flat websites.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 03 Mar 2014 04:42:40 +0000</pubDate>
+        <link>http://anthonytrama.com//2014/03/03/what-is-killing-flat-design-2/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2014/03/03/what-is-killing-flat-design-2/</guid>
+        
+        
+        <category>Design</category>
+        
+        <category>Industry</category>
+        
+      </item>
+    
+      <item>
+        <title>Yahoo&amp;#8217;s Cheap and Sneaky Recruiting Tactic (it&amp;#8217;s a good thing)</title>
+        <description>&lt;p&gt;While trying to figure out how to win my &lt;a title=&quot;Yahoo Fantasy Football&quot; href=&quot;http://football.fantasysports.yahoo.com&quot; target=&quot;_blank&quot;&gt;fantasy football&lt;/a&gt; matchup with my ragtag group of second stringers, I noticed the page I was on seemed to have some sort of bug. So, like any sports fan, my first instinct was to open Chrome’s Dev Tools and see if I could spot the JavaScript error. Yeah, there were a few, but what I really noticed was Yahoo’s free, easy, effortless recruiting tactic. The following message appeared right at the top of their console log&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Like poking around in code? Like fantasy sports? Yahoo! Fantasy Sports is currently hiring both front and back end engineers. If you’d like to get paid to do what you love, drop us a resume at sportsjobs@yahoo-inc.com, and let us know where you found the e-mail address!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div id=&quot;attachment_516&quot; style=&quot;width: 1361px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.17.57-PM.png&quot;&gt;&lt;img class=&quot;size-full wp-image-516&quot; alt=&quot;Screenshot of Yahoo Fantasy Football&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.17.57-PM.png&quot; width=&quot;1351&quot; height=&quot;321&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.17.57-PM-300x71.png 300w, http://www.anthonytrama.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.17.57-PM-1024x243.png 1024w, http://www.anthonytrama.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-20-at-9.17.57-PM.png 1351w&quot; sizes=&quot;(max-width: 1351px) 100vw, 1351px&quot; /&gt;&lt;/a&gt;
+  
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    The lineup may be ugly, but the console log is just brilliant
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Seems like an easy, no-brainer way to find niche developers (remember, Yahoo asks you to mention where you found the email address). I don’t think other industries such as banking, communication, healthcare, etc. would benefit in the same way Yahoo may from this, but if you’re looking for developers who use your product, why not give this, or something similar (i.e., adding a similar comment in your source), a try?&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 Nov 2013 23:15:16 +0000</pubDate>
+        <link>http://anthonytrama.com//2013/11/24/yahoo-fantasy-sports/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2013/11/24/yahoo-fantasy-sports/</guid>
+        
+        
+        <category>Industry</category>
+        
+      </item>
+    
+      <item>
+        <title>&amp;#8230;And Boom Goes the Dynamite</title>
+        <description>&lt;p&gt;When I decided to finally update my site and blog, after close to 5 years without a redesign and 2 years without a new post, I initially thought about blowing up the whole thing and starting over. Most people change, for better or worse, over time. Their ascent or descent is gradual. Pedro Martinez didn’t go from a 1.74 ERA and joking about the Yankees being his Daddy to sporting a Phillies uniform while making the NL East his daddy overnight.&lt;/p&gt;
+
+&lt;div id=&quot;attachment_381&quot; style=&quot;width: 660px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://anthonytrama.com/wp-content/uploads/2013/05/pedro.jpg&quot;&gt;&lt;img class=&quot;size-full wp-image-381&quot; title=&quot;Pedro Martinez pitching for the Philadelphia Phillies&quot; alt=&quot;Pedro Martinez pitching for the Philadelphia Phillies&quot; src=&quot;http://anthonytrama.com/wp-content/uploads/2013/05/pedro.jpg&quot; width=&quot;650&quot; height=&quot;600&quot; /&gt;&lt;/a&gt;
+
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    &amp;#8220;Good thing he didn&amp;#8217;t mention the Don Zimmer fight.&amp;#8221; Wikimedia photo taken by Flickr member dbking: &lt;a href=&quot;http://en.wikipedia.org/wiki/File:Pedro_Mart%C3%ADnez_on_September_8,_2009.jpg&quot;&gt;http://en.wikipedia.org/wiki/File:Pedro_Mart%C3%ADnez_on_September_8,_2009.jpg&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Continuing with the world’s worst metaphor, when a blog goes 2 years without an update, comparing posts is (hopefully) like comparing apples to old, rotten apples. Not that I’m trying to claim I’m a Pedro Martinez caliber web developer. I have better taste in &lt;a title=&quot;Pedro Martinez&quot; href=&quot;http://en.wikipedia.org/wiki/File:PedroMartinezSmall.jpg&quot; target=&quot;_blank&quot;&gt;hair&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since my previous post, I have&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Learned a few new skills and drastically improved my knowledge of a few languages&lt;/li&gt;
+  &lt;li&gt;Started a new job&lt;/li&gt;
+  &lt;li&gt;Received a promotion&lt;/li&gt;
+  &lt;li&gt;Tied the knot&lt;/li&gt;
+  &lt;li&gt;Improved my health&lt;/li&gt;
+  &lt;li&gt;Most importantly, won my first fantasy baseball championship&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nevertheless, I’ve decided to keep the old blog posts. After all, there aren’t very many and I would hate to disappoint all the active commenters. Take for instance the guy who knows where I can get a great deal on R0lex watches, the non-bot with perfect English who has SEO secrets that he’s unlocked, or my future bride who is currently living in Russia and just waiting for me to bring her over the “United State of America.” I think it’s good to look at failures and embarrassments. They keep you moving forward; and at the very least, it will motivate me to write more so I can bury those old posts.&lt;/p&gt;
+
+&lt;p&gt;So here’s to writing better, more insightful content more often. Or at least bouncing back a little.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 27 May 2013 22:26:41 +0000</pubDate>
+        <link>http://anthonytrama.com//2013/05/27/and-boom-goes-the-dynamite/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2013/05/27/and-boom-goes-the-dynamite/</guid>
+        
+        <category>Baseball</category>
+        
+        <category>Sports</category>
+        
+        
+        <category>Personal</category>
+        
+      </item>
+    
+      <item>
+        <title>The Web as a House</title>
+        <description>&lt;p&gt;JavaScript, jQuery, HTML, CSS, PHP, JSON. People who don’t work with the web every day, and sadly some who do, usually have a hard time understanding the difference between all the web jargon they come across. I’ve found it very useful to use the house analogy in the past. It’s not perfect, but it certainly helps others understand what goes into a website. So the next time your boss or client asks why you can’t just build your whole website with JavaScript, hold your laughter (for a few minutes) and give them the house analogy.&lt;/p&gt;
+
+&lt;h2 id=&quot;html-the-bones&quot;&gt;HTML: The Bones&lt;/h2&gt;
+
+&lt;p&gt;The “bones” of a house determine how it is laid out and where everything goes. They will also tell you how strong the structure and foundation are. Is it a 1,000 square foot home or a 4,000 square foot home? How many rooms will it have? Where does each area of the house go? You don’t want the laundry room upstairs near the baby’s room, do you? Should the kitchen be at the front or back of the house?&lt;/p&gt;
+
+&lt;p&gt;The structure of a website is very similar. The process of building a small 1 page site is different from a 10 page site, which is different from a 100 page site. Which is partially why a client shouldn’t expect an answer to the most common question we hear: “how much does a website cost?” And if you’re the client and hear a flat answer without any consultation or other questions, run fast.&lt;/p&gt;
+
+&lt;p&gt;A standard page is made up of individual elements (e.g., &amp;lt;article&amp;gt;, &amp;lt;h1&amp;gt; [heading], &amp;lt;p&amp;gt; [paragraph], &lt;img /&gt; [image]). When you craft these together, you end up with the structure of a page.&lt;/p&gt;
+
+&lt;div id=&quot;attachment_528&quot; style=&quot;width: 1776px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.25.24-PM.png&quot;&gt;&lt;img class=&quot;size-full wp-image-528&quot; alt=&quot;The content of this post (left) and the code, with the structural elements in red (right)&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.25.24-PM.png&quot; width=&quot;1766&quot; height=&quot;436&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.25.24-PM-300x74.png 300w, http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.25.24-PM-1024x252.png 1024w, http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.25.24-PM.png 1766w&quot; sizes=&quot;(max-width: 1766px) 100vw, 1766px&quot; /&gt;&lt;/a&gt;
+  
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    The content of this post (left) and the code, with the structural elements in red (right)
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Before any code or color hits a site, most designers usually create wireframes, which are like blueprints for a website. They are plain, single-color, and often hand drawn sketches of the site. Just like architects take flow into account when designing a house, when laying out wireframes, designers need to think of how your users will not just use the site, but the overall narrative from landing on the site to checkout.&lt;/p&gt;
+
+&lt;p&gt;By the way, have you ever walked into an open house and had somebody make you look at advertisements from Netflix or Ancestry.com before you get through the entry? That would be stupid right? Think about that next time you consider throwing pop-up advertisements on a site.&lt;/p&gt;
+
+&lt;p&gt;You can live in a house with nothing but drywall, studs, and a roof, but it won’t be pleasant. Similarly, with HTML alone, your site can function, but it will lack some serious curb appeal.&lt;/p&gt;
+
+&lt;h2 id=&quot;css-the-curb-appeal&quot;&gt;CSS: The Curb Appeal&lt;/h2&gt;
+
+&lt;p&gt;CSS (Cascading Style Sheets) are what gives websites their design. It’s the decorating stage of building your &lt;del&gt;house&lt;/del&gt; website. Its the paint, furniture, and flooring; and is really what most users see when they see your site at first. It gives HTML elements their color, size, and shape. &lt;span style=&quot;border: 1px solid #aaa; border-radius: .25em;&quot;&gt;Borders&lt;/span&gt;, &lt;span style=&quot;text-shadow: 1px 1px 1px #aaa;&quot;&gt;shadows&lt;/span&gt;, &lt;span style=&quot;color: orange;&quot;&gt;colors&lt;/span&gt;, &lt;span style=&quot;font-weight: bold;&quot;&gt;bold fonts&lt;/span&gt;, &lt;span style=&quot;opacity: .65;&quot;&gt;opacities&lt;/span&gt;, etc. are all determined by CSS.&lt;/p&gt;
+
+&lt;div id=&quot;attachment_540&quot; style=&quot;width: 660px&quot; class=&quot;wp-caption alignnone&quot;&gt;
+  &lt;a href=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.45.25-PM.png&quot;&gt;&lt;img class=&quot;size-full wp-image-540&quot; alt=&quot;A preview of what this page would look like without any CSS. Notice everything still functions and you can still get content you need, even if it looks bland.&quot; src=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.45.25-PM.png&quot; width=&quot;650&quot; height=&quot;597&quot; srcset=&quot;http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.45.25-PM-300x275.png 300w, http://www.anthonytrama.com/wp-content/uploads/2012/03/Screen-Shot-2013-11-21-at-8.45.25-PM.png 650w&quot; sizes=&quot;(max-width: 650px) 100vw, 650px&quot; /&gt;&lt;/a&gt;
+  
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    A preview of what this page would look like without any CSS. Notice everything still functions and you can still get content you need, even if it looks bland.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;CSS often does little to actually determine structure of the site, but it does determine how it is presented in the browser.&lt;/p&gt;
+
+&lt;h2 id=&quot;javascript-its-electric&quot;&gt;JavaScript: It’s Electric&lt;/h2&gt;
+
+&lt;p&gt;A house is completely livable without electricity; people did it for most of our existence. However, electricity makes it possible to flip a switch and light a room instead of carrying a candle. It turns on the TV, brews our coffee, and powers our dishwashers. Javascript does just that to websites. It tells the user that their password is too weak as they’re typing it in, creates and animates graphs, makes drag and drop possible on all modern browsers, and makes photos bigger when you click the thumbnail.&lt;/p&gt;
+
+&lt;p&gt;JavasScript is a powerful language that can access and change the CSS of a page, edit the HTML and content and, if not used properly, really hinder the user’s experience on a page. If you’ve ever landed on a page that won’t let you escape out of multiple popups (called alerts) or had your experienced ruined by a choppy, slow page, JavaScript was likely to blame. Actually, a bad developer was most likely the one to blame; but they probably used JavaScript. In the same way, you watch your electric bill, watch the amount of JavaScript on your page because it &lt;a title=&quot;How One Second Could Cost Amazon $1.6 Billion In Sales&quot; href=&quot;http://www.fastcompany.com/1825005/how-one-second-could-cost-amazon-16-billion-sales&quot; target=&quot;_blank&quot;&gt;may cost you&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;h2 id=&quot;php-letting-data-flow&quot;&gt;PHP: Letting Data Flow&lt;/h2&gt;
+
+&lt;p&gt;Let me start by saying that you can replace PHP with other server-side languages (e.g., Ruby, Python, C#) for this example. These languages are the most powerful and complex languages and the user never sees any of it. It’s all done behind the scenes, generally, before and after the user lands on pages. Server-side languages communicate with databases and control the most of the data we interact with on the web today. The reason why you and I can both log into the same bank’s website and see different data is because the server-side language knows who you are after login and only displays your information on your screen.&lt;/p&gt;
+
+&lt;p&gt;This example may not be as strong as the 3 above, but it’s similar to the sewer system. It’s a give and take relationship with the grid. Clean water comes in, say in the form of shower water. We interact with it by showering, and the resulting dirty, waste water goes back to the sewer system.&lt;/p&gt;
+
+&lt;h2 id=&quot;seo-sweat-equity-online&quot;&gt;SEO: Sweat Equity Online&lt;/h2&gt;
+
+&lt;p&gt;I’m not going to pretend to be an expert with SEO (Search Engine Optimization). Or pretend that the heading above isn’t incredibly cheesy.&lt;/p&gt;
+
+&lt;p&gt;I know enough to use good practices on the sites I work on, but there are knowledgeable people who know much more than I do about SEO. If you’re selling a house, there are things that your realtor will have you do to attract more potential buyers through your front door, such as putting in a new lawn, a fresh coat of paint, or new hardwood flooring. Similarly, you can practice good SEO and get visitors to your site from search engines. However, like a real house’s attractiveness – the best SEO comes from care and maintenance over time (good content and clean code) and not a few &lt;a title=&quot;The Dirty Little Secrets of Search&quot; href=&quot;http://www.nytimes.com/2011/02/13/business/13search.html&quot; target=&quot;_blank&quot;&gt;sneaky tricks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Oh, and for the last time, there’s no way to contact Google and ask them to make you the first result.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 06 Mar 2012 04:23:28 +0000</pubDate>
+        <link>http://anthonytrama.com//2012/03/06/the-web-as-a-house/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2012/03/06/the-web-as-a-house/</guid>
+        
+        
+        <category>Development</category>
+        
+      </item>
+    
+      <item>
+        <title>Freelance Tip: Charging Hourly vs. Per Job</title>
+        <description>&lt;p&gt;When I first started, I found it to be a hassle to track minutes every time I worked on a project; sometimes I only had 15 minutes to work on something. So I began charging by project, but I found even more problems with project-based pricing; so here’s my advice to beginner freelancers:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I believe that project-based jobs are not as fair to both parties as hourly-based jobs.  A five page website, depending on how complex the design is, number of plugins, amount of content, etc. can really vary. The same goes for a logo, brochure, photo editing, and pretty much any job you’ll run into. Designers must build this in to their pricing, which is unfair to clients whose projects are less complex or have less edits. Hourly-based prices allows the client to pay for the amount of time you put into the project. No more, no less.&lt;/li&gt;
+  &lt;li&gt;If you charge $500 for a project and it’s taken you 10 hours, then you just worked for $50 per hour. Not bad for most people. But, if there are a lot of edits and it takes 20 hours, you just made $25 p/hour. Assuming you want $50 per hour, that’s far below what you originally wanted. How likely are some designers to put in the extra 5 hours it might take to refine the project (consciously or unconsciously)? If you being paid what’s fair to you, you’re more likely to really put your heart into the project.&lt;/li&gt;
+  &lt;li&gt;Charging hourly makes it hard to estimate costs to clients at first. But once you get a few job under your belt, you can go back and look at similar projects and how long it took you. Your estimates will become more accurate over time.&lt;/li&gt;
+  &lt;li&gt;You no longer need to enter times into a spreadsheet and convert fractions to hours to money. There are a lot of free and paid resources out there to track your time. Personally, I use &lt;a href=&quot;https://chrome.google.com/webstore/detail/hbhcgdpbdenjjpekdajanfgchlgacdea&quot;&gt;Chrome Time Track&lt;/a&gt; because it’s ridiculously easy to use and is always on my Chrome toolbar. I always enter the time into a spreadsheet when I’m done – just incase I accidentally leave the timer running when I’m done. Other popular resources are:
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.toggl.com&quot;&gt;toggl&lt;/a&gt; (paid), &lt;a href=&quot;http://www.tickspot.com&quot;&gt;Tick&lt;/a&gt; (free and paid)&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.getklok.com&quot;&gt;Klok&lt;/a&gt; (free and paid)&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.rad3.com/timeloc.html&quot;&gt;Timeloc&lt;/a&gt; (free)&lt;/li&gt;
+      &lt;li&gt;…and even your iPhone timer (in the built in clock app).&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 29 Aug 2011 04:39:25 +0000</pubDate>
+        <link>http://anthonytrama.com//2011/08/29/freelance-tip-charging-hourly-vs-per-job/</link>
+        <guid isPermaLink="true">http://anthonytrama.com//2011/08/29/freelance-tip-charging-hourly-vs-per-job/</guid>
+        
+        <category>Freelancing Tips</category>
+        
+        
+        <category>Freelancing Tips</category>
+        
+      </item>
+    
   </channel>
 </rss>

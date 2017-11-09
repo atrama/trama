@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Anthony Trama</title>
-  <meta name="description" content="I want to make the web experience better.
-">
+  <title>Trouble Styling HTML5 elements?</title>
+  <meta name="description" content="The Problem">
 
   <link type="text/css" rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://anthonytrama.com//404.html">
+  <link rel="canonical" href="http://anthonytrama.com//2011/03/11/trouble-styling-html5-elements/">
   <link rel="alternate" type="application/rss+xml" title="Anthony Trama" href="http://anthonytrama.com//feed.xml">
 </head>
 
@@ -30,13 +29,37 @@
 
 
     <main>
-      <h1>That page you're looking for?</h1>
-<p>
-  It's not here. Maybe it went to website heaven. Or a farm where it gets to play with other pages all day.
-</p>
-<p>
-  In the mean time, try going back <a href="/">home</a> or <a href="/#contact">contact me</a> and let me know how you got here, so I can fix it.
-</p>
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Trouble Styling HTML5 elements?</h1>
+    <p class="post-meta"><time datetime="March 11, 2011" itemprop="datePublished">March 11, 2011</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="the-problem">The Problem</h3>
+
+<p>I was editing the CSS of a SECTION element in a WordPress theme that was supposed to be HTML5-ready the other day and couldn’t get the changes to appear. Convinced that I must have misspelled the class name somewhere, I spell checked and went on a copy/paste frenzy. Still no luck.</p>
+
+<h3 id="the-solution">The Solution</h3>
+
+<p>But luckily, once I found the fix, it was easy. HTML5 elements must have their display property set to block. Just add the following snippet toward the top of your CSS file (taken from the <a href="http://html5boilerplate.com" target="_blank">HTML5 Boilerplate</a>):</p>
+
+<p><code class="highlighter-rouge">article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</code></p>
+
+<h3 id="but-wait-our-good-friend-internet-explorer-isnt-done-yet">But Wait. Our Good Friend, Internet Explorer isn’t Done Yet</h3>
+
+<p>If you (or your theme) haven’t done it already, you’ll need to add some JavaScript so you can style your elements. Otherwise IE won’t know these elements exist.</p>
+
+<p><code class="highlighter-rouge">document.createElement('article');&lt;br /&gt;
+document.createElement('header');&lt;br /&gt;
+document.createElement('section');&lt;br /&gt;
+etc..</code></p>
+
+  </div>
+
+</article>
 
     </main>
 
