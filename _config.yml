@@ -7,11 +7,11 @@
 
 # Site settings
 title: Anthony Trama
-email: anthony@anthonytrama.com
+email: aftrama@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   I want to make the web experience better.
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://anthonytrama.com" # the base hostname & protocol for your site
+url: "http://www.anthonytrama.com" # the base hostname & protocol for your site
 twitter_username: aftrama
 github_username:  atrama
 paginate: 7
