@@ -19,8 +19,13 @@ paginate_path: "blog/page:num"
 
 exclude: [gulpfile.js, Gemfile.lock, node_modules]
 
-gems: [jekyll-paginate, jekyll-assets]
+plugins: [jekyll-paginate, jekyll-assets]
 
+defaults:
+  - scope:
+      path: "img"
+    values:
+      image: true
 
 # Build settings
 markdown: kramdown
