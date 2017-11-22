@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jekyll-paginate'
-gem 'jekyll-assets'
+gem 'jekyll-assets', '<3.0'
 
 require 'rbconfig'
 if RbConfig::CONFIG['target_os'] =~ /darwin(1[0-3])/i
