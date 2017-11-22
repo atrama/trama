@@ -17,7 +17,7 @@ github_username:  atrama
 paginate: 7
 paginate_path: "blog/page:num"
 
-exclude: [gulpfile.js, Gemfile.lock, node_modules]
+exclude: [gulpfile.js, Gemfile.lock, node_modules, vendor]
 
 plugins: [jekyll-paginate, jekyll-assets]
 
