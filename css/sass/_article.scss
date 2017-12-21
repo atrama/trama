@@ -78,6 +78,11 @@ article{
 
 .post{
 
+  @include mq(){
+    padding-left:5%;
+    padding-right:5%;
+  }
+
   h1{
     margin-top: .5rem;
     font-size: 2rem;
@@ -106,13 +111,9 @@ article{
   width: 100vw;
   margin-left: -2%;
   overflow: hidden;
-  // background-size:cover;
-  // background-position:50% 35%;
-  // background-repeat: no-repeat;
 
   @include mq($size:sm){
     height:20rem;
-    // background-position:50% 25%;
   }
 
   @include mq($size:md){
@@ -121,7 +122,7 @@ article{
 
   @include mq(){
     height: 40rem;
-    margin-left: -12.5%;
+    margin-left: -20.5%;
   }
 
   img{
