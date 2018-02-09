@@ -5,6 +5,7 @@ body{
   margin: 0;
   @include sitePadding($body:true);
   color:$main;
+  line-height: 1.7;
   //sticky footer
   display: flex;
   flex-direction: column;
@@ -27,8 +28,8 @@ pre{
 }
 
 code{
-    padding: 0 .25rem;
-    background: $gray;
+    padding: 0 .5rem;
+    background: lighten($gray, 10%);
 }
 
 li{
@@ -46,6 +47,7 @@ figcaption{
   font-style: italic;
   @include mq($size:sm){
     padding:1rem 5rem;
+    text-align: center;
   }
 }
 

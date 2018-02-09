@@ -1,11 +1,12 @@
 html, body {
   font-family: 'Merriweather', serif;
-  font-size: 22px; }
+  font-size: 20px; }
 
 h1, h2, h3 {
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
-  font-weight: 900; }
+  font-weight: 900;
+  line-height: 1.4; }
 
 h1 {
   font-size: 4rem; }
@@ -28,6 +29,7 @@ body {
   margin: 0;
   padding: 0 1.5%;
   color: #2E3532;
+  line-height: 1.7;
   display: flex;
   flex-direction: column;
   min-height: 100vh; }
@@ -50,8 +52,8 @@ pre {
     background: transparent; }
 
 code {
-  padding: 0 .25rem;
-  background: #d8dadf; }
+  padding: 0 .5rem;
+  background: #f4f4f6; }
 
 li {
   padding-bottom: .25rem; }
@@ -66,7 +68,8 @@ figcaption {
   font-style: italic; }
   @media (min-width: 701px) {
     figcaption {
-      padding: 1rem 5rem; } }
+      padding: 1rem 5rem;
+      text-align: center; } }
 
 img {
   max-width: 100%; }
@@ -440,7 +443,19 @@ article .featuredImagePreview {
       font-size: 5rem; } }
 
 .post h2 {
-  font-size: 2.25rem; }
+  font-size: 1.5rem; }
+  @media (min-width: 1101px) {
+    .post h2 {
+      font-size: 2.25rem; } }
+  @media (min-width: 1401px) {
+    .post h2 {
+      font-size: 2.5rem; } }
+
+.post h3 {
+  font-size: 1.15rem; }
+  @media (min-width: 1101px) {
+    .post h3 {
+      font-size: 1.5rem; } }
 
 .post-meta {
   margin-top: .25rem;
