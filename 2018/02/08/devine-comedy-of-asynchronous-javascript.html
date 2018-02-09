@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Divine Comedy of Asynchronous JavaScript</title>
+  <meta name="description" content="When I was in college, I took an entire class dedicated to the Divine Comedy. I don’t remember very much about it, other than I had little desire to read it ...">
+
+  <link type="text/css" rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://www.anthonytrama.com//2018/02/08/devine-comedy-of-asynchronous-javascript">
+  <link rel="alternate" type="application/rss+xml" title="Anthony Trama" href="http://www.anthonytrama.com//feed.xml">
+
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Anthony Trama">
+  
+</head>
+
+
+  <body>
+
+    <header>
+	    <h1><a href="/">Anthony Trama</a></h1>
+
+			<nav class="mainNav">
+			    <!-- <a class="navScroll" data-nav="workLink" href="#work">Work</a>-->
+			    <a href="/blog">Writing</a>
+			    <a href="/#contact">Contact</a>
+			</nav>
+</header>
+
+
+    <main>
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  <figure class="featuredImage">
+    <picture>
+      <source srcset="/img/articles/2018/02/danteLg.webp" media="(min-width: 1400px)" type="image/webp" >
+      <source srcset="/img/articles/2018/02/danteLg.jpg" media="(min-width: 1400px)" >
+      <source srcset="/img/articles/2018/02/danteMd.webp" media="(min-width: 1101px)" type="image/webp" >
+      <source srcset="/img/articles/2018/02/danteMd.jpg" media="(min-width: 1101px)" >
+      <source srcset="/img/articles/2018/02/danteMd.webp" media="(min-width: 701px)" type="image/webp" >
+      <source srcset="/img/articles/2018/02/danteMd.jpg" media="(min-width: 701px)" >
+      <source srcset="/img/articles/2018/02/dante.webp" type="image/webp">
+      <img src="/img/articles/2018/02/dante.jpg" alt="Gustave Doré - Dante Alighieri - purgatorio - Plate 9 (Canto III - Charon)">
+    </picture>
+  </figure>
+  
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">The Divine Comedy of Asynchronous JavaScript</h1>
+    <p class="post-meta"><time datetime="February 8, 2018" itemprop="datePublished">February 8, 2018</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>When I was in <a href="https://www.ucsb.edu">college</a>, I took an entire class dedicated to the <cite>Divine Comedy</cite>. I don’t remember very much about it, other than I had little desire to read it and the professor had a thick Italian accent; both of which resulted in this being all that I remember about the book. That, and it had something to do with Dante traveling through hell, purgatory, and eventually, Heaven. So come with me, as we travel through the hell, purgatory, and Heaven of asynchronous JavaScript.</p>
+
+<h2 id="what-do-i-mean-by-asynchronous-javascript">What do I Mean by Asynchronous JavaScript?</h2>
+<p>Asynchronous programming allows different events to occur independently of the flow in the main program. On websites, this means that different events can occur that update state with user input, refresh a list while the user does something else on the page, or check properties of different objects, all without blocking each other.</p>
+
+<h2 id="the-two-circles-of-callback-hell-purgatorio">The Two Circles of Callback Hell (purgatorio)</h2>
+
+<figure>
+  <picture>
+    <source srcset="/img/articles/2018/02/infernoLg.webp" media="(min-width: 1400px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/infernoLg.jpg" media="(min-width: 1400px)" />
+    <source srcset="/img/articles/2018/02/infernoSm.webp" media="(min-width: 701px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/infernoSm.jpg" media="(min-width: 701px)" />
+    <source srcset="/img/articles/2018/02/purgatorio.webp" type="image/webp" />
+    <img src="/img/articles/2018/02/purgatorio.jpg" alt="Hoarders and Wasters" />
+  </picture>
+  <figcaption>Gustave Doré's: The hoarders and wasters. "For all the gold that is beneath the moon, / Or ever has been, of these weary souls / Could never make a single one reponse." <a href="https://en.wikipedia.org/wiki/File:Gustave_Dor%C3%A9_-_Dante_Alighieri_-_Inferno_-_Plate_22_(Canto_VII_-_Hoarders_and_Waster.jpg">Wikimedia</a></figcaption>
+</figure>
+
+<p>Let me get this out there right off the bat: callbacks are not technically asynchronous. They are used to synchronously order functions that call asynchronous functions. Like do thing A, then make ajax request B, then do thing C, then do thing D. Also, I am not using actual callbacks in every example, but instead what I have seen developers do in the wild. There are three levels of Callback Hell, so let’s dive into the deepest level.</p>
+
+<h3 id="the-third-circle">The Third Circle</h3>
+<p>In this example, there are four functions. <code class="highlighter-rouge">compileAll()</code> simply returns the result of <code class="highlighter-rouge">getThingOne</code>, <code class="highlighter-rouge">getThingTwo</code>, and <code class="highlighter-rouge">getThingThree</code>. Easy enough. Except <code class="highlighter-rouge">getThingTwo</code> is asynchronous and must wait on <code class="highlighter-rouge">setTimeout</code> before returning a value, similar to making a network request (<code class="highlighter-rouge">setTimeout</code> is used in place of network requests for this entire article).</p>
+
+<p>This is not an example of a true callback, but it is a race condition that happens too often and you can remediate this with a promise. The issue here is that <code class="highlighter-rouge">compileAll</code> doesn’t know to wait for <code class="highlighter-rouge">getThingTwo</code>, so it just prints the result before <code class="highlighter-rouge">getThingTwo</code> has finished because it has no way to know when <code class="highlighter-rouge">getThingTwo</code> finishes. Hence, the result is <code class="highlighter-rouge">Chuck Noll, undefined, Mike Tomlin</code>. Check out the example below.</p>
+
+<p data-height="265" data-theme-id="0" data-slug-hash="Xgjmgz" data-default-tab="result" data-user="atrama" data-embed-version="2" data-pen-title="Callback Hell 1" class="codepen">See the Pen <a href="https://codepen.io/atrama/pen/Xgjmgz/">Callback Hell 1</a> by Anthony Trama (<a href="https://codepen.io/atrama">@atrama</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>This method works if all your code is synchronous. This would obviously not be a viable solution if you had asynchronous functions, because you can never guarantee that you are getting the correct result from each function.</p>
+
+<p><strong>The rest of the examples will have code snippets, but a link to a CodePen, so you can experiment and see the result of each one.</strong></p>
+
+<h3 id="the-second-circle">The Second Circle</h3>
+<p>The previous circle was pretty rough, but we’re still stuck in Callback Hell as you can tell by the example below and the fact that you can hear <cite>American Woman</cite> by Lenny Kravitz playing in the background.</p>
+
+<p>In this example, we’re kicking everything off with <code class="highlighter-rouge">getThingOne()</code>, which then has to have the logic inside of it to explicitly call <code class="highlighter-rouge">getThingTwo()</code> and pass the result of <code class="highlighter-rouge">getThingOne()</code> into it and so on down the line. This means that you can never separate these functions. Anytime you want to <code class="highlighter-rouge">getThingOne()</code>, you have to accept the chain reaction of events and results that come with it.</p>
+
+<script src="https://gist.github.com/atrama/f512564ce2b73ba7c72f2c1d12f2e052.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/pwEjVP">View the demo on CodePen</a></p>
+
+<p>There is no way to just <code class="highlighter-rouge">getThingOne()</code> and simply return the result of <code class="highlighter-rouge">names[0]</code> (<code class="highlighter-rouge">Chuck Noll</code>). Promises, on the other hand, allow you to do just that.</p>
+
+<h3 id="the-first-circle">The First Circle</h3>
+
+<script src="https://gist.github.com/atrama/5169d5c2171f221d97d02ba0fee45670.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/vWqjrv">View the demo on CodePen</a></p>
+
+<p>This is really the only <strong>true</strong> example of a callback here. It’s very similar to the previous example except for a couple things:</p>
+
+<ol>
+  <li>Callbacks are passed as named functions, so <code class="highlighter-rouge">getThingOne</code> isn’t directly tied to <code class="highlighter-rouge">getThingTwo</code> which isn’t directly tied to <code class="highlighter-rouge">getThingThree</code>.</li>
+  <li>You can optionally call the callback only if it’s passed <code class="highlighter-rouge">if(typeof callback === 'function){return callback()}, allowing you to call </code>getThingOne<code class="highlighter-rouge"> without needing to call </code>getThingTwo`.</li>
+  <li>Callbacks are not named inside of each respective function, so you could do something like <code class="highlighter-rouge">getThingTwo([1,2,3], getThingOne)</code>.</li>
+</ol>
+
+<p>Callbacks are not necessarily bad patterns in and of themselves, but they are not the right tool for the job when you are dealing with asynchronous functions that can be called concurrently.</p>
+
+<h2 id="the-4-terraces-of-promise-purgatory-purgatorio">The 4 Terraces of Promise Purgatory (Purgatorio)</h2>
+
+<figure>
+  <picture>
+    <source srcset="/img/articles/2018/02/purgatorioLg.webp" media="(min-width: 1400px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/purgatorioLg.jpg" media="(min-width: 1400px)" />
+    <source srcset="/img/articles/2018/02/purgatorioMd.webp" media="(min-width: 1101px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/purgatorioMd.jpg" media="(min-width: 1101px)" />
+    <source srcset="/img/articles/2018/02/purgatorioSm.webp" media="(min-width: 701px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/purgatorioSm.jpg" media="(min-width: 701px)" />
+    <source srcset="/img/articles/2018/02/purgatorio.webp" type="image/webp" />
+    <img src="/img/articles/2018/02/purgatorio.jpg" alt="Eustache Le Sueur" />
+  </picture>
+  <figcaption>Dante begins the Purgatorio by invoking the Muses" <a href="https://commons.wikimedia.org/wiki/File:Eustache_Le_Sueur_002.jpg">Wikimedia</a></figcaption>
+</figure>
+
+<h3 id="what-the-hell-is-a-promise">What the Hell is a Promise?</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> are simply functions that represent an eventual return value (whether successful or not) of an asynchronous operation. Imagine you’re shoe shopping and you need a different size, so you ask a salesman, Al. When Al tells you, “let me go check for that size in the back and I’ll come back and let you know,” he is promising one of two things. He will either return with that shoe or, if it’s not available, return and inform you that he couldn’t find it. He might give you more information (“we’ll get a new shipment Monday,” “we don’t carry that shoe anymore”), but it’s up to Al to decide what information he returns with.</p>
+
+<p>Meanwhile, while Al is doing his thing in the back, you are free to wait where you are, or continue looking around, check out socks, or do whatever you’d like. You don’t have to stand still and wait for Al, he’ll let you know the result of his inventory check before you move to the next step and head over to the cash register.</p>
+
+<p>In order for a promise to complete, it needs to either <code class="highlighter-rouge">resolve</code> or <code class="highlighter-rouge">reject</code>, which executes the promise (see examples below). In the case of Al, once the inventory check <code class="highlighter-rouge">resolves</code> or <code class="highlighter-rouge">rejects</code>, he immediately turns around and returns to the front of the store where you met. Let’s dive into some examples, to make more sense of promises.</p>
+
+<h3 id="the-fourth-terrace-a-single-promise-to-handle-them-all">The Fourth Terrace: A Single Promise to Handle Them All</h3>
+<p>In reality, this really is probably one of the cleaner examples here, but it doesn’t quite show the power of promises. Line 11 executes <code class="highlighter-rouge">getAllNames</code>, which creates a <code class="highlighter-rouge">new Promise</code> that fetches a list of names. Think of <code class="highlighter-rouge">resolve(names)</code> as <code class="highlighter-rouge">return(names)</code> in a non-promise function.</p>
+
+<script src="https://gist.github.com/atrama/33a2ffb9c6396da9d542aef79f7024a4.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/vZXLBE">View the demo on CodePen</a></p>
+
+<p>The magic starts to happen in <code class="highlighter-rouge">then()</code> method, which has an parameter, <code class="highlighter-rouge">response</code>. <code class="highlighter-rouge">response</code> is whatever was resolved in the promise on line 5. In this case, an array of names.</p>
+
+<h3 id="the-third-terrace-chaining">The Third Terrace: Chaining</h3>
+<p>What if we need to wait on three separate asynchronous functions to finish before doing something? That’s where chaining come in handy. In the example below, <code class="highlighter-rouge">getThingTwo</code>, which is another promise, is called after <code class="highlighter-rouge">getThingOne</code> finishes successfully (I’ll cover <code class="highlighter-rouge">reject</code> in a bit). Notice that <code class="highlighter-rouge">getThingTwo</code> is dependent on the response of <code class="highlighter-rouge">getThingOne</code>, which is passed into <code class="highlighter-rouge">getThingTwo</code> as the <code class="highlighter-rouge">arg</code> parameter. This same pattern is followed in <code class="highlighter-rouge">getThingThree</code>, which is dependent on the response of <code class="highlighter-rouge">getThingTwo</code>. <code class="highlighter-rouge">getThingThree</code> then passes its response to the last <code class="highlighter-rouge">then()</code> on line 32, which spits out the result in the DOM.</p>
+
+<script src="https://gist.github.com/atrama/f39c6445b6f695b4c111b078d1e5e46c.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/NgRGBR">View the demo on CodePen</a></p>
+
+<p>This method of chaining is especially useful when your promises rely on each other. They will each wait on the previous promise(s) to resolve before starting. If you need multiple promises, but they can be called independently of each other (they don’t need another promise’s response), you can bundle them together. That’s what happens in the Second Terrace of Promise Purgatory…</p>
+
+<h3 id="the-second-terrace-bundling-promises">The Second Terrace: Bundling Promises</h3>
+<p>This is an extremely clean way to tell your code to go do a bunch of asynchronous tasks, and then wait until they all complete before handling their response. It’s like sending a bunch of shoe salesmen into the back to get different models of shoes that you want to buy because, hey, it’s payday today, while you wait by the register until they all return with the different pairs of shoes you tasked them with retrieving. One might come back after 30 seconds, another after 2 minutes, and the last one after 5 minutes. They can give you their shoe immediately after they return, but you’re going to wait until all the salesmen return before proceeding to the cash register.</p>
+
+<p>In the example below, <code class="highlighter-rouge">getThingOne</code>, <code class="highlighter-rouge">getThingTwo</code>, and <code class="highlighter-rouge">getThingThree</code> are the salesmen and the <code class="highlighter-rouge">.then()</code> on line 4 is you walking up to the cash register.
+<script src="https://gist.github.com/atrama/f7d693b00b091f3154353ebc944ab80e.js"></script>
+<a href="https://codepen.io/atrama/pen/YQGwzz">View the demo on CodePen</a></p>
+
+<p>But you are a picky customer. You will only give this store your business if they have all your shoes. So, what if one of them has trouble retrieving your shoe? Then you enter the First Terrace…</p>
+
+<h3 id="the-first-terrace-catching-rejections-and-errors">The First Terrace: Catching Rejections and Errors</h3>
+<p>When a promise is unsuccessful, it can <code class="highlighter-rouge">reject()</code>. This can happen because of a bad request, or maybe it watches a status code in an ajax request and <code class="highlighter-rouge">reject()</code>s if it’s not in the <code class="highlighter-rouge">200</code> range. If any promise in the group <code class="highlighter-rouge">reject()</code>s, the <code class="highlighter-rouge">catch()</code> on line 13 will fire immediately and proceed with your error handling.</p>
+
+<p><code class="highlighter-rouge">getThingFour</code> is the fourth salesman who is just appearing in this story. You sent him to find a pair of shoes, but he couldn’t find your size, so he returns with bad news. So this is like you walking out of the store upset. This is really helpful in allowing you to give feedback to users and developers so your code doesn’t just fail silently because of a failed promise.</p>
+
+<script src="https://gist.github.com/atrama/c9a8d091d9f43497e8d9d2bbf87a4889.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/OgWbbj">View the demo on CodePen</a></p>
+
+<h2 id="the-4-spheres-of-asyncawait-paradise-paradiso">The 4 Spheres of Async/Await Paradise (Paradiso)</h2>
+
+<figure>
+  <picture>
+    <source srcset="/img/articles/2018/02/paradisoMd.webp" media="(min-width: 1101px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/paradisoMd.jpg" media="(min-width: 1101px)" />
+    <source srcset="/img/articles/2018/02/paradisoSm.webp" media="(min-width: 701px)" type="image/webp" />
+    <source srcset="/img/articles/2018/02/paradisoSm.jpg" media="(min-width: 701px)" />
+    <source srcset="/img/articles/2018/02/paradiso.webp" type="image/webp" />
+    <img src="/img/articles/2018/02/paradiso.jpg" alt="Saint Francis of Assisi by Jusepe de Ribera" />
+  </picture>
+  <figcaption>Saint Francis of Assisi<a href="https://en.wikipedia.org/wiki/File:Saint_Francis_of_Assisi_by_Jusepe_de_Ribera.jpg">Wikimedia</a></figcaption>
+</figure>
+
+<p>Things get even better when you get into Async/Await Paradise. Async/Await is really a pattern that is comprised of:</p>
+
+<ol>
+  <li>An <code class="highlighter-rouge">async</code> function, which looks like a regular function, but has <code class="highlighter-rouge">async</code> before the function declaration. Async functions return a promise and simplify the promise pattern.</li>
+  <li>An <code class="highlighter-rouge">await</code> expression, which pauses execution until the promise expression is resolved.</li>
+</ol>
+
+<p>This should make sense with the following examples, so let’s move on to paradise…</p>
+
+<h3 id="the-fourth-sphere-another-promise-to-handle-them-all">The Fourth Sphere: Another promise to handle them all</h3>
+<p>Admittedly, this example doesn’t really prove that advantageous over the first promise example, but it gets better, I promise. Everything is the same until line 13, where the async function is declared and called. <code class="highlighter-rouge">names</code> represents the returned value of the <code class="highlighter-rouge">getAllNames</code> promise and puts that value in <code class="highlighter-rouge">result.innerText</code>.</p>
+
+<script src="https://gist.github.com/atrama/30dd79a14de3eeb01a64b7c28b177b8c.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/eRdoqo">View the demo on CodePen</a></p>
+
+<p>At this point, it’s just a different syntax with an extra two lines of JavaScript, but there are already advantages of writing code this way, as opposed to Promise Purgatory 1.</p>
+
+<ul>
+  <li>The syntax is easier to read. This is, admittedly, personal preference. However, either due to it being true, or due to the nature of JavaScript developers always falling in love with the new thing, most developers who have used both seem to prefer the <code class="highlighter-rouge">await</code> syntax over <code class="highlighter-rouge">.then()</code>.</li>
+  <li>It future proofs your code, should there be additional promises needed later. Using <code class="highlighter-rouge">await</code>, the next developer simply needs to add another line of code. If you use <code class="highlighter-rouge">.then()</code>, they will need to either chain <code class="highlighter-rouge">.then()</code> or rewrite the <code class="highlighter-rouge">.then()</code> into await (more about this in the next example).</li>
+</ul>
+
+<h3 id="the-third-sphere-cleaning-up-then-then-then">The Third Sphere: Cleaning up then() then() then()</h3>
+<p>If you show this to somebody who has no (or little) experience with promises, I’ll bet they will understand it better than the second promise example. Lines 1 through 27 are virtually the same as the previous promise example. However, the async <code class="highlighter-rouge">getNames</code> function creates 3 variables for <code class="highlighter-rouge">name1</code>, <code class="highlighter-rouge">name2</code>, and <code class="highlighter-rouge">name3</code> and awaits each of those before placing the results of each of those promises in <code class="highlighter-rouge">result.innerText</code>. This is much cleaner to read than chained <code class="highlighter-rouge">then().then().then()</code> and easier to write.</p>
+
+<script src="https://gist.github.com/atrama/a3540334e479daccba307f8b4305c8f4.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/awmrBv">View the demo on CodePen</a></p>
+
+<p>The downside of having three awaits is the same as chaining 3 promises: <strong>they perform synchronously</strong>. Meaning, <code class="highlighter-rouge">getThingTwo</code> will not start until <code class="highlighter-rouge">getThingOne</code> has finished (note: this is no different than chaining <code class="highlighter-rouge">.then()</code>). There are times when that is necessary, but in this case, we can, and want to, get all three names asynchronously.</p>
+
+<h3 id="the-second-sphere-awaiting-bundled-promises">The Second Sphere: Awaiting Bundled Promises</h3>
+<p>Now things really start to get clean in our list of promises. Once again, on line 33 <code class="highlighter-rouge">result.innerText</code> simply returns <code class="highlighter-rouge">names</code>; however, this time <code class="highlighter-rouge">names</code> represents a <code class="highlighter-rouge">Promise.all</code> object, which requests all three promises at once (asynchronously), and waits for them all to resolve (or any to reject) before moving to the next line. Line 31 simply lists out the array of promises as invoked functions.</p>
+
+<script src="https://gist.github.com/atrama/f29bb0b37e546aba71a140787b138774.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/dzpVgL">View the demo on CodePen</a></p>
+
+<h3 id="the-first-sphere-seeing-the-error-of-our-ways">The First Sphere: Seeing the Error of Our Ways</h3>
+<p>On line 38 in the gist below, <code class="highlighter-rouge">promiseList</code> defines an additional promise (<code class="highlighter-rouge">getThingFour()</code>), which will reject, like it did in the First Terrace of Purgatorio. This time though, I’m relying on a <code class="highlighter-rouge">try...catch</code> statement to catch rejected promises. It really works similar to the pattern of:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myPromise()
+.then(response =&gt; {
+  ...//if successful
+}).catch(error =&gt; {
+  ...//error handled here
+})
+</code></pre></div></div>
+
+<p>Except, with <code class="highlighter-rouge">await</code>, you use</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try{
+  let response = await myPromise() //if successful
+}catch(error){
+  //error handled here
+}
+</code></pre></div></div>
+
+<p>This might not look that much better, and you’re right in this case. But, with multiple chained promises, it gets even more messy…</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myPromise()
+.then(response =&gt; {
+  doNextPromise();
+}).then(response2 =&gt; {
+  doAnotherPromise();
+}).then(response3 =&gt; {
+  //do something if all promises are successful
+}).catch(error =&gt; {
+  //error handled here
+})
+</code></pre></div></div>
+
+<p>…but with <code class="highlighter-rouge">await</code>, your code stays clean</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try{
+  const myPromise = await myPromise();
+  const doNextPromise = await doNextPromise();
+  const doAnotherPromise = await doAnotherPromise();
+  //do something if all promises are successful
+}catch(error){
+  //error handled here
+}
+</code></pre></div></div>
+
+<p>Make sense? They both boil down to block 1 handling successful attempts and block 2 handling errors. In the example below, much like previous examples, line 40 <code class="highlighter-rouge">await</code>s <code class="highlighter-rouge">Promise.all(promiseList)</code> and does something with the response. But this time, lines 43-44 handle any errors (<code class="highlighter-rouge">reject()</code> thrown from any promise). <code class="highlighter-rouge">error</code> (line 42) is simply whatever the rejected promise returns in the <code class="highlighter-rouge">reject()</code> method. For example: <code class="highlighter-rouge">reject('No arguments supplied')</code>, <code class="highlighter-rouge">reject('Invalid user')</code>, <code class="highlighter-rouge">reject(jsonResponse.errorMessage)</code>, etc.</p>
+
+<script src="https://gist.github.com/atrama/a3382720b683c866db1214c337e7cae8.js"></script>
+
+<p><a href="https://codepen.io/atrama/pen/jwMoVX">View the demo on CodePen</a></p>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+<p>That’s it! You’ve made it all the way through! Hopefully this helps you understand how to better work with asynchronous JavaScript and clean up any old patterns. See something that can be improved here, <a href="/#contact">let me know</a>!</p>
+
+  </div>
+
+</article>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+
+<h2 class="footerHeading">Anthony Trama</h2>
+<ul class="socialMedia">
+  
+  <li>
+    <a href="https://github.com/atrama" title="github"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">atrama</span></a>
+
+  </li>
+  
+
+  <li>
+    <a href="http://codepen.io/atrama" title="codepen"><span class="icon icon--codepen"><svg viewBox="0 0 120 120"><path class="outer-ring" d="M60.048 0C26.884 0 0 26.9 0 60.048s26.884 60 60 60.047c33.163 0 60.047-26.883 60.047-60.047 S93.211 0 60 0z M60.048 110.233c-27.673 0-50.186-22.514-50.186-50.186S32.375 9.9 60 9.9 c27.672 0 50.2 22.5 50.2 50.186S87.72 110.2 60 110.233z"/><path class="inner-box" d="M97.147 48.319c-0.007-0.047-0.019-0.092-0.026-0.139c-0.016-0.09-0.032-0.18-0.056-0.268 c-0.014-0.053-0.033-0.104-0.05-0.154c-0.025-0.078-0.051-0.156-0.082-0.232c-0.021-0.053-0.047-0.105-0.071-0.156 c-0.033-0.072-0.068-0.143-0.108-0.211c-0.029-0.051-0.061-0.1-0.091-0.148c-0.043-0.066-0.087-0.131-0.135-0.193 c-0.035-0.047-0.072-0.094-0.109-0.139c-0.051-0.059-0.104-0.117-0.159-0.172c-0.042-0.043-0.083-0.086-0.127-0.125 c-0.059-0.053-0.119-0.104-0.181-0.152c-0.048-0.037-0.095-0.074-0.145-0.109c-0.019-0.012-0.035-0.027-0.053-0.039L61.817 23.5 c-1.072-0.715-2.468-0.715-3.54 0L24.34 46.081c-0.018 0.012-0.034 0.027-0.053 0.039c-0.05 0.035-0.097 0.072-0.144 0.1 c-0.062 0.049-0.123 0.1-0.181 0.152c-0.045 0.039-0.086 0.082-0.128 0.125c-0.056 0.055-0.108 0.113-0.158 0.2 c-0.038 0.045-0.075 0.092-0.11 0.139c-0.047 0.062-0.092 0.127-0.134 0.193c-0.032 0.049-0.062 0.098-0.092 0.1 c-0.039 0.068-0.074 0.139-0.108 0.211c-0.024 0.051-0.05 0.104-0.071 0.156c-0.031 0.076-0.057 0.154-0.082 0.2 c-0.017 0.051-0.035 0.102-0.05 0.154c-0.023 0.088-0.039 0.178-0.056 0.268c-0.008 0.047-0.02 0.092-0.025 0.1 c-0.019 0.137-0.029 0.275-0.029 0.416V71.36c0 0.1 0 0.3 0 0.418c0.006 0 0 0.1 0 0.1 c0.017 0.1 0 0.2 0.1 0.268c0.015 0.1 0 0.1 0.1 0.154c0.025 0.1 0.1 0.2 0.1 0.2 c0.021 0.1 0 0.1 0.1 0.154c0.034 0.1 0.1 0.1 0.1 0.213c0.029 0 0.1 0.1 0.1 0.1 c0.042 0.1 0.1 0.1 0.1 0.193c0.035 0 0.1 0.1 0.1 0.139c0.05 0.1 0.1 0.1 0.2 0.2 c0.042 0 0.1 0.1 0.1 0.125c0.058 0.1 0.1 0.1 0.2 0.152c0.047 0 0.1 0.1 0.1 0.1 c0.019 0 0 0 0.1 0.039L58.277 96.64c0.536 0.4 1.2 0.5 1.8 0.537c0.616 0 1.233-0.18 1.77-0.537 l33.938-22.625c0.018-0.012 0.034-0.027 0.053-0.039c0.05-0.035 0.097-0.072 0.145-0.109c0.062-0.049 0.122-0.1 0.181-0.152 c0.044-0.039 0.085-0.082 0.127-0.125c0.056-0.055 0.108-0.113 0.159-0.172c0.037-0.045 0.074-0.09 0.109-0.139 c0.048-0.062 0.092-0.127 0.135-0.193c0.03-0.049 0.062-0.098 0.091-0.146c0.04-0.07 0.075-0.141 0.108-0.213 c0.024-0.051 0.05-0.102 0.071-0.154c0.031-0.078 0.057-0.156 0.082-0.234c0.017-0.051 0.036-0.102 0.05-0.154 c0.023-0.088 0.04-0.178 0.056-0.268c0.008-0.045 0.02-0.092 0.026-0.137c0.018-0.139 0.028-0.277 0.028-0.418V48.735 C97.176 48.6 97.2 48.5 97.1 48.319z M63.238 32.073l25.001 16.666L77.072 56.21l-13.834-9.254V32.073z M56.856 32.1 v14.883L43.023 56.21l-11.168-7.471L56.856 32.073z M29.301 54.708l7.983 5.34l-7.983 5.34V54.708z M56.856 88.022L31.855 71.4 l11.168-7.469l13.833 9.252V88.022z M60.048 67.597l-11.286-7.549l11.286-7.549l11.285 7.549L60.048 67.597z M63.238 88.022V73.14 l13.834-9.252l11.167 7.469L63.238 88.022z M90.794 65.388l-7.982-5.34l7.982-5.34V65.388z"/></svg>
+</span><span class="username">atrama</span></a>
+
+  </li>
+
+  
+  <li>
+    <a href="https://twitter.com/aftrama" title="twitter"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">aftrama</span></a>
+
+  </li>
+  
+</ul>
+</footer>
+<script type="text/javascript" src="/assets/main.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic|Merriweather:400,700,300,400italic' rel='stylesheet' type='text/css'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-13276805-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-13276805-1');
+</script>
+
+
+
+  </body>
+
+</html>

@@ -6,9 +6,247 @@
 </description>
     <link>http://www.anthonytrama.com//</link>
     <atom:link href="http://www.anthonytrama.com//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Dec 2017 04:35:42 +0000</pubDate>
-    <lastBuildDate>Thu, 21 Dec 2017 04:35:42 +0000</lastBuildDate>
+    <pubDate>Fri, 09 Feb 2018 04:40:19 +0000</pubDate>
+    <lastBuildDate>Fri, 09 Feb 2018 04:40:19 +0000</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>The Divine Comedy of Asynchronous JavaScript</title>
+        <description>&lt;p&gt;When I was in &lt;a href=&quot;https://www.ucsb.edu&quot;&gt;college&lt;/a&gt;, I took an entire class dedicated to the &lt;cite&gt;Divine Comedy&lt;/cite&gt;. I don’t remember very much about it, other than I had little desire to read it and the professor had a thick Italian accent; both of which resulted in this being all that I remember about the book. That, and it had something to do with Dante traveling through hell, purgatory, and eventually, Heaven. So come with me, as we travel through the hell, purgatory, and Heaven of asynchronous JavaScript.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-do-i-mean-by-asynchronous-javascript&quot;&gt;What do I Mean by Asynchronous JavaScript?&lt;/h2&gt;
+&lt;p&gt;Asynchronous programming allows different events to occur independently of the flow in the main program. On websites, this means that different events can occur that update state with user input, refresh a list while the user does something else on the page, or check properties of different objects, all without blocking each other.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-two-circles-of-callback-hell-purgatorio&quot;&gt;The Two Circles of Callback Hell (purgatorio)&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;picture&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/infernoLg.webp&quot; media=&quot;(min-width: 1400px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/infernoLg.jpg&quot; media=&quot;(min-width: 1400px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/infernoSm.webp&quot; media=&quot;(min-width: 701px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/infernoSm.jpg&quot; media=&quot;(min-width: 701px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorio.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img src=&quot;/img/articles/2018/02/purgatorio.jpg&quot; alt=&quot;Hoarders and Wasters&quot; /&gt;
+  &lt;/picture&gt;
+  &lt;figcaption&gt;Gustave Doré's: The hoarders and wasters. &quot;For all the gold that is beneath the moon, / Or ever has been, of these weary souls / Could never make a single one reponse.&quot; &lt;a href=&quot;https://en.wikipedia.org/wiki/File:Gustave_Dor%C3%A9_-_Dante_Alighieri_-_Inferno_-_Plate_22_(Canto_VII_-_Hoarders_and_Waster.jpg&quot;&gt;Wikimedia&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let me get this out there right off the bat: callbacks are not technically asynchronous. They are used to synchronously order functions that call asynchronous functions. Like do thing A, then make ajax request B, then do thing C, then do thing D. Also, I am not using actual callbacks in every example, but instead what I have seen developers do in the wild. There are three levels of Callback Hell, so let’s dive into the deepest level.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-third-circle&quot;&gt;The Third Circle&lt;/h3&gt;
+&lt;p&gt;In this example, there are four functions. &lt;code class=&quot;highlighter-rouge&quot;&gt;compileAll()&lt;/code&gt; simply returns the result of &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingThree&lt;/code&gt;. Easy enough. Except &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; is asynchronous and must wait on &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; before returning a value, similar to making a network request (&lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; is used in place of network requests for this entire article).&lt;/p&gt;
+
+&lt;p&gt;This is not an example of a true callback, but it is a race condition that happens too often and you can remediate this with a promise. The issue here is that &lt;code class=&quot;highlighter-rouge&quot;&gt;compileAll&lt;/code&gt; doesn’t know to wait for &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt;, so it just prints the result before &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; has finished because it has no way to know when &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; finishes. Hence, the result is &lt;code class=&quot;highlighter-rouge&quot;&gt;Chuck Noll, undefined, Mike Tomlin&lt;/code&gt;. Check out the example below.&lt;/p&gt;
+
+&lt;p data-height=&quot;265&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;Xgjmgz&quot; data-default-tab=&quot;result&quot; data-user=&quot;atrama&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Callback Hell 1&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;https://codepen.io/atrama/pen/Xgjmgz/&quot;&gt;Callback Hell 1&lt;/a&gt; by Anthony Trama (&lt;a href=&quot;https://codepen.io/atrama&quot;&gt;@atrama&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;This method works if all your code is synchronous. This would obviously not be a viable solution if you had asynchronous functions, because you can never guarantee that you are getting the correct result from each function.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The rest of the examples will have code snippets, but a link to a CodePen, so you can experiment and see the result of each one.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-second-circle&quot;&gt;The Second Circle&lt;/h3&gt;
+&lt;p&gt;The previous circle was pretty rough, but we’re still stuck in Callback Hell as you can tell by the example below and the fact that you can hear &lt;cite&gt;American Woman&lt;/cite&gt; by Lenny Kravitz playing in the background.&lt;/p&gt;
+
+&lt;p&gt;In this example, we’re kicking everything off with &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne()&lt;/code&gt;, which then has to have the logic inside of it to explicitly call &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo()&lt;/code&gt; and pass the result of &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne()&lt;/code&gt; into it and so on down the line. This means that you can never separate these functions. Anytime you want to &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne()&lt;/code&gt;, you have to accept the chain reaction of events and results that come with it.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/f512564ce2b73ba7c72f2c1d12f2e052.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/pwEjVP&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There is no way to just &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne()&lt;/code&gt; and simply return the result of &lt;code class=&quot;highlighter-rouge&quot;&gt;names[0]&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;Chuck Noll&lt;/code&gt;). Promises, on the other hand, allow you to do just that.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-first-circle&quot;&gt;The First Circle&lt;/h3&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/5169d5c2171f221d97d02ba0fee45670.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/vWqjrv&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is really the only &lt;strong&gt;true&lt;/strong&gt; example of a callback here. It’s very similar to the previous example except for a couple things:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Callbacks are passed as named functions, so &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt; isn’t directly tied to &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; which isn’t directly tied to &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingThree&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;You can optionally call the callback only if it’s passed &lt;code class=&quot;highlighter-rouge&quot;&gt;if(typeof callback === 'function){return callback()}, allowing you to call &lt;/code&gt;getThingOne&lt;code class=&quot;highlighter-rouge&quot;&gt; without needing to call &lt;/code&gt;getThingTwo`.&lt;/li&gt;
+  &lt;li&gt;Callbacks are not named inside of each respective function, so you could do something like &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo([1,2,3], getThingOne)&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Callbacks are not necessarily bad patterns in and of themselves, but they are not the right tool for the job when you are dealing with asynchronous functions that can be called concurrently.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-4-terraces-of-promise-purgatory-purgatorio&quot;&gt;The 4 Terraces of Promise Purgatory (Purgatorio)&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;picture&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioLg.webp&quot; media=&quot;(min-width: 1400px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioLg.jpg&quot; media=&quot;(min-width: 1400px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioMd.webp&quot; media=&quot;(min-width: 1101px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioMd.jpg&quot; media=&quot;(min-width: 1101px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioSm.webp&quot; media=&quot;(min-width: 701px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorioSm.jpg&quot; media=&quot;(min-width: 701px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/purgatorio.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img src=&quot;/img/articles/2018/02/purgatorio.jpg&quot; alt=&quot;Eustache Le Sueur&quot; /&gt;
+  &lt;/picture&gt;
+  &lt;figcaption&gt;Dante begins the Purgatorio by invoking the Muses&quot; &lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Eustache_Le_Sueur_002.jpg&quot;&gt;Wikimedia&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;what-the-hell-is-a-promise&quot;&gt;What the Hell is a Promise?&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promises&lt;/a&gt; are simply functions that represent an eventual return value (whether successful or not) of an asynchronous operation. Imagine you’re shoe shopping and you need a different size, so you ask a salesman, Al. When Al tells you, “let me go check for that size in the back and I’ll come back and let you know,” he is promising one of two things. He will either return with that shoe or, if it’s not available, return and inform you that he couldn’t find it. He might give you more information (“we’ll get a new shipment Monday,” “we don’t carry that shoe anymore”), but it’s up to Al to decide what information he returns with.&lt;/p&gt;
+
+&lt;p&gt;Meanwhile, while Al is doing his thing in the back, you are free to wait where you are, or continue looking around, check out socks, or do whatever you’d like. You don’t have to stand still and wait for Al, he’ll let you know the result of his inventory check before you move to the next step and head over to the cash register.&lt;/p&gt;
+
+&lt;p&gt;In order for a promise to complete, it needs to either &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt;, which executes the promise (see examples below). In the case of Al, once the inventory check &lt;code class=&quot;highlighter-rouge&quot;&gt;resolves&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;rejects&lt;/code&gt;, he immediately turns around and returns to the front of the store where you met. Let’s dive into some examples, to make more sense of promises.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-fourth-terrace-a-single-promise-to-handle-them-all&quot;&gt;The Fourth Terrace: A Single Promise to Handle Them All&lt;/h3&gt;
+&lt;p&gt;In reality, this really is probably one of the cleaner examples here, but it doesn’t quite show the power of promises. Line 11 executes &lt;code class=&quot;highlighter-rouge&quot;&gt;getAllNames&lt;/code&gt;, which creates a &lt;code class=&quot;highlighter-rouge&quot;&gt;new Promise&lt;/code&gt; that fetches a list of names. Think of &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve(names)&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;return(names)&lt;/code&gt; in a non-promise function.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/33a2ffb9c6396da9d542aef79f7024a4.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/vZXLBE&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The magic starts to happen in &lt;code class=&quot;highlighter-rouge&quot;&gt;then()&lt;/code&gt; method, which has an parameter, &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt; is whatever was resolved in the promise on line 5. In this case, an array of names.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-third-terrace-chaining&quot;&gt;The Third Terrace: Chaining&lt;/h3&gt;
+&lt;p&gt;What if we need to wait on three separate asynchronous functions to finish before doing something? That’s where chaining come in handy. In the example below, &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt;, which is another promise, is called after &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt; finishes successfully (I’ll cover &lt;code class=&quot;highlighter-rouge&quot;&gt;reject&lt;/code&gt; in a bit). Notice that &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; is dependent on the response of &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt;, which is passed into &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; as the &lt;code class=&quot;highlighter-rouge&quot;&gt;arg&lt;/code&gt; parameter. This same pattern is followed in &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingThree&lt;/code&gt;, which is dependent on the response of &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingThree&lt;/code&gt; then passes its response to the last &lt;code class=&quot;highlighter-rouge&quot;&gt;then()&lt;/code&gt; on line 32, which spits out the result in the DOM.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/f39c6445b6f695b4c111b078d1e5e46c.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/NgRGBR&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This method of chaining is especially useful when your promises rely on each other. They will each wait on the previous promise(s) to resolve before starting. If you need multiple promises, but they can be called independently of each other (they don’t need another promise’s response), you can bundle them together. That’s what happens in the Second Terrace of Promise Purgatory…&lt;/p&gt;
+
+&lt;h3 id=&quot;the-second-terrace-bundling-promises&quot;&gt;The Second Terrace: Bundling Promises&lt;/h3&gt;
+&lt;p&gt;This is an extremely clean way to tell your code to go do a bunch of asynchronous tasks, and then wait until they all complete before handling their response. It’s like sending a bunch of shoe salesmen into the back to get different models of shoes that you want to buy because, hey, it’s payday today, while you wait by the register until they all return with the different pairs of shoes you tasked them with retrieving. One might come back after 30 seconds, another after 2 minutes, and the last one after 5 minutes. They can give you their shoe immediately after they return, but you’re going to wait until all the salesmen return before proceeding to the cash register.&lt;/p&gt;
+
+&lt;p&gt;In the example below, &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingThree&lt;/code&gt; are the salesmen and the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt; on line 4 is you walking up to the cash register.
+&lt;script src=&quot;https://gist.github.com/atrama/f7d693b00b091f3154353ebc944ab80e.js&quot;&gt;&lt;/script&gt;
+&lt;a href=&quot;https://codepen.io/atrama/pen/YQGwzz&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;But you are a picky customer. You will only give this store your business if they have all your shoes. So, what if one of them has trouble retrieving your shoe? Then you enter the First Terrace…&lt;/p&gt;
+
+&lt;h3 id=&quot;the-first-terrace-catching-rejections-and-errors&quot;&gt;The First Terrace: Catching Rejections and Errors&lt;/h3&gt;
+&lt;p&gt;When a promise is unsuccessful, it can &lt;code class=&quot;highlighter-rouge&quot;&gt;reject()&lt;/code&gt;. This can happen because of a bad request, or maybe it watches a status code in an ajax request and &lt;code class=&quot;highlighter-rouge&quot;&gt;reject()&lt;/code&gt;s if it’s not in the &lt;code class=&quot;highlighter-rouge&quot;&gt;200&lt;/code&gt; range. If any promise in the group &lt;code class=&quot;highlighter-rouge&quot;&gt;reject()&lt;/code&gt;s, the &lt;code class=&quot;highlighter-rouge&quot;&gt;catch()&lt;/code&gt; on line 13 will fire immediately and proceed with your error handling.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;getThingFour&lt;/code&gt; is the fourth salesman who is just appearing in this story. You sent him to find a pair of shoes, but he couldn’t find your size, so he returns with bad news. So this is like you walking out of the store upset. This is really helpful in allowing you to give feedback to users and developers so your code doesn’t just fail silently because of a failed promise.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/c9a8d091d9f43497e8d9d2bbf87a4889.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/OgWbbj&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-4-spheres-of-asyncawait-paradise-paradiso&quot;&gt;The 4 Spheres of Async/Await Paradise (Paradiso)&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;picture&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/paradisoMd.webp&quot; media=&quot;(min-width: 1101px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/paradisoMd.jpg&quot; media=&quot;(min-width: 1101px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/paradisoSm.webp&quot; media=&quot;(min-width: 701px)&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/paradisoSm.jpg&quot; media=&quot;(min-width: 701px)&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/paradiso.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img src=&quot;/img/articles/2018/02/paradiso.jpg&quot; alt=&quot;Saint Francis of Assisi by Jusepe de Ribera&quot; /&gt;
+  &lt;/picture&gt;
+  &lt;figcaption&gt;Saint Francis of Assisi&lt;a href=&quot;https://en.wikipedia.org/wiki/File:Saint_Francis_of_Assisi_by_Jusepe_de_Ribera.jpg&quot;&gt;Wikimedia&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Things get even better when you get into Async/Await Paradise. Async/Await is really a pattern that is comprised of:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;An &lt;code class=&quot;highlighter-rouge&quot;&gt;async&lt;/code&gt; function, which looks like a regular function, but has &lt;code class=&quot;highlighter-rouge&quot;&gt;async&lt;/code&gt; before the function declaration. Async functions return a promise and simplify the promise pattern.&lt;/li&gt;
+  &lt;li&gt;An &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt; expression, which pauses execution until the promise expression is resolved.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This should make sense with the following examples, so let’s move on to paradise…&lt;/p&gt;
+
+&lt;h3 id=&quot;the-fourth-sphere-another-promise-to-handle-them-all&quot;&gt;The Fourth Sphere: Another promise to handle them all&lt;/h3&gt;
+&lt;p&gt;Admittedly, this example doesn’t really prove that advantageous over the first promise example, but it gets better, I promise. Everything is the same until line 13, where the async function is declared and called. &lt;code class=&quot;highlighter-rouge&quot;&gt;names&lt;/code&gt; represents the returned value of the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAllNames&lt;/code&gt; promise and puts that value in &lt;code class=&quot;highlighter-rouge&quot;&gt;result.innerText&lt;/code&gt;.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/30dd79a14de3eeb01a64b7c28b177b8c.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/eRdoqo&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;At this point, it’s just a different syntax with an extra two lines of JavaScript, but there are already advantages of writing code this way, as opposed to Promise Purgatory 1.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The syntax is easier to read. This is, admittedly, personal preference. However, either due to it being true, or due to the nature of JavaScript developers always falling in love with the new thing, most developers who have used both seem to prefer the &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt; syntax over &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;It future proofs your code, should there be additional promises needed later. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;, the next developer simply needs to add another line of code. If you use &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt;, they will need to either chain &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt; or rewrite the &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt; into await (more about this in the next example).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-third-sphere-cleaning-up-then-then-then&quot;&gt;The Third Sphere: Cleaning up then() then() then()&lt;/h3&gt;
+&lt;p&gt;If you show this to somebody who has no (or little) experience with promises, I’ll bet they will understand it better than the second promise example. Lines 1 through 27 are virtually the same as the previous promise example. However, the async &lt;code class=&quot;highlighter-rouge&quot;&gt;getNames&lt;/code&gt; function creates 3 variables for &lt;code class=&quot;highlighter-rouge&quot;&gt;name1&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;name2&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;name3&lt;/code&gt; and awaits each of those before placing the results of each of those promises in &lt;code class=&quot;highlighter-rouge&quot;&gt;result.innerText&lt;/code&gt;. This is much cleaner to read than chained &lt;code class=&quot;highlighter-rouge&quot;&gt;then().then().then()&lt;/code&gt; and easier to write.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/a3540334e479daccba307f8b4305c8f4.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/awmrBv&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The downside of having three awaits is the same as chaining 3 promises: &lt;strong&gt;they perform synchronously&lt;/strong&gt;. Meaning, &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingTwo&lt;/code&gt; will not start until &lt;code class=&quot;highlighter-rouge&quot;&gt;getThingOne&lt;/code&gt; has finished (note: this is no different than chaining &lt;code class=&quot;highlighter-rouge&quot;&gt;.then()&lt;/code&gt;). There are times when that is necessary, but in this case, we can, and want to, get all three names asynchronously.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-second-sphere-awaiting-bundled-promises&quot;&gt;The Second Sphere: Awaiting Bundled Promises&lt;/h3&gt;
+&lt;p&gt;Now things really start to get clean in our list of promises. Once again, on line 33 &lt;code class=&quot;highlighter-rouge&quot;&gt;result.innerText&lt;/code&gt; simply returns &lt;code class=&quot;highlighter-rouge&quot;&gt;names&lt;/code&gt;; however, this time &lt;code class=&quot;highlighter-rouge&quot;&gt;names&lt;/code&gt; represents a &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.all&lt;/code&gt; object, which requests all three promises at once (asynchronously), and waits for them all to resolve (or any to reject) before moving to the next line. Line 31 simply lists out the array of promises as invoked functions.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/f29bb0b37e546aba71a140787b138774.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/dzpVgL&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-first-sphere-seeing-the-error-of-our-ways&quot;&gt;The First Sphere: Seeing the Error of Our Ways&lt;/h3&gt;
+&lt;p&gt;On line 38 in the gist below, &lt;code class=&quot;highlighter-rouge&quot;&gt;promiseList&lt;/code&gt; defines an additional promise (&lt;code class=&quot;highlighter-rouge&quot;&gt;getThingFour()&lt;/code&gt;), which will reject, like it did in the First Terrace of Purgatorio. This time though, I’m relying on a &lt;code class=&quot;highlighter-rouge&quot;&gt;try...catch&lt;/code&gt; statement to catch rejected promises. It really works similar to the pattern of:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;myPromise()
+.then(response =&amp;gt; {
+  ...//if successful
+}).catch(error =&amp;gt; {
+  ...//error handled here
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Except, with &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;, you use&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;try{
+  let response = await myPromise() //if successful
+}catch(error){
+  //error handled here
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This might not look that much better, and you’re right in this case. But, with multiple chained promises, it gets even more messy…&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;myPromise()
+.then(response =&amp;gt; {
+  doNextPromise();
+}).then(response2 =&amp;gt; {
+  doAnotherPromise();
+}).then(response3 =&amp;gt; {
+  //do something if all promises are successful
+}).catch(error =&amp;gt; {
+  //error handled here
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;…but with &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;, your code stays clean&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;try{
+  const myPromise = await myPromise();
+  const doNextPromise = await doNextPromise();
+  const doAnotherPromise = await doAnotherPromise();
+  //do something if all promises are successful
+}catch(error){
+  //error handled here
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Make sense? They both boil down to block 1 handling successful attempts and block 2 handling errors. In the example below, much like previous examples, line 40 &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;s &lt;code class=&quot;highlighter-rouge&quot;&gt;Promise.all(promiseList)&lt;/code&gt; and does something with the response. But this time, lines 43-44 handle any errors (&lt;code class=&quot;highlighter-rouge&quot;&gt;reject()&lt;/code&gt; thrown from any promise). &lt;code class=&quot;highlighter-rouge&quot;&gt;error&lt;/code&gt; (line 42) is simply whatever the rejected promise returns in the &lt;code class=&quot;highlighter-rouge&quot;&gt;reject()&lt;/code&gt; method. For example: &lt;code class=&quot;highlighter-rouge&quot;&gt;reject('No arguments supplied')&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;reject('Invalid user')&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;reject(jsonResponse.errorMessage)&lt;/code&gt;, etc.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/atrama/a3382720b683c866db1214c337e7cae8.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://codepen.io/atrama/pen/jwMoVX&quot;&gt;View the demo on CodePen&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping Up&lt;/h2&gt;
+&lt;p&gt;That’s it! You’ve made it all the way through! Hopefully this helps you understand how to better work with asynchronous JavaScript and clean up any old patterns. See something that can be improved here, &lt;a href=&quot;/#contact&quot;&gt;let me know&lt;/a&gt;!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+        <link>http://www.anthonytrama.com//2018/02/08/devine-comedy-of-asynchronous-javascript</link>
+        <guid isPermaLink="true">http://www.anthonytrama.com//2018/02/08/devine-comedy-of-asynchronous-javascript</guid>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
     
       <item>
         <title>The new site</title>
@@ -391,35 +629,6 @@
         
         
         <category>Development</category>
-        
-      </item>
-    
-      <item>
-        <title>Freelance Tip: Charging Hourly vs. Per Job</title>
-        <description>&lt;p&gt;When I first started, I found it to be a hassle to track minutes every time I worked on a project; sometimes I only had 15 minutes to work on something. So I began charging by project, but I found even more problems with project-based pricing; so here’s my advice to beginner freelancers:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;I believe that project-based jobs are not as fair to both parties as hourly-based jobs.  A five page website, depending on how complex the design is, number of plugins, amount of content, etc. can really vary. The same goes for a logo, brochure, photo editing, and pretty much any job you’ll run into. Designers must build this in to their pricing, which is unfair to clients whose projects are less complex or have less edits. Hourly-based prices allows the client to pay for the amount of time you put into the project. No more, no less.&lt;/li&gt;
-  &lt;li&gt;If you charge $500 for a project and it’s taken you 10 hours, then you just worked for $50 per hour. Not bad for most people. But, if there are a lot of edits and it takes 20 hours, you just made $25 p/hour. Assuming you want $50 per hour, that’s far below what you originally wanted. How likely are some designers to put in the extra 5 hours it might take to refine the project (consciously or unconsciously)? If you being paid what’s fair to you, you’re more likely to really put your heart into the project.&lt;/li&gt;
-  &lt;li&gt;Charging hourly makes it hard to estimate costs to clients at first. But once you get a few job under your belt, you can go back and look at similar projects and how long it took you. Your estimates will become more accurate over time.&lt;/li&gt;
-  &lt;li&gt;You no longer need to enter times into a spreadsheet and convert fractions to hours to money. There are a lot of free and paid resources out there to track your time. Personally, I use &lt;a href=&quot;https://chrome.google.com/webstore/detail/hbhcgdpbdenjjpekdajanfgchlgacdea&quot;&gt;Chrome Time Track&lt;/a&gt; because it’s ridiculously easy to use and is always on my Chrome toolbar. I always enter the time into a spreadsheet when I’m done – just incase I accidentally leave the timer running when I’m done. Other popular resources are:
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.toggl.com&quot;&gt;toggl&lt;/a&gt; (paid), &lt;a href=&quot;http://www.tickspot.com&quot;&gt;Tick&lt;/a&gt; (free and paid)&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.getklok.com&quot;&gt;Klok&lt;/a&gt; (free and paid)&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.rad3.com/timeloc.html&quot;&gt;Timeloc&lt;/a&gt; (free)&lt;/li&gt;
-      &lt;li&gt;…and even your iPhone timer (in the built in clock app).&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 29 Aug 2011 04:39:25 +0000</pubDate>
-        <link>http://www.anthonytrama.com//2011/08/29/freelance-tip-charging-hourly-vs-per-job/</link>
-        <guid isPermaLink="true">http://www.anthonytrama.com//2011/08/29/freelance-tip-charging-hourly-vs-per-job/</guid>
-        
-        <category>Freelancing Tips</category>
-        
-        
-        <category>Freelancing Tips</category>
         
       </item>
     
