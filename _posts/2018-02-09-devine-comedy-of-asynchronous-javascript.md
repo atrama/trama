@@ -16,7 +16,7 @@ When I was in [college](https://www.ucsb.edu), I took an entire class dedicated 
 ## What do I Mean by Asynchronous JavaScript?
 Asynchronous programming allows different events to occur independently of the flow in the main program. On websites, this means that different events can occur that update state with user input, refresh a list while the user does something else on the page, or check properties of different objects, all without blocking each other.
 
-## The Two Circles of Callback Hell (purgatorio)
+## The Two Circles of Callback Hell (Inferno)
 
 <figure>
   <picture>
@@ -24,8 +24,8 @@ Asynchronous programming allows different events to occur independently of the f
     <source srcset="/img/articles/2018/02/infernoLg.jpg" media="(min-width: 1400px)" >
     <source srcset="/img/articles/2018/02/infernoSm.webp" media="(min-width: 701px)" type="image/webp" >
     <source srcset="/img/articles/2018/02/infernoSm.jpg" media="(min-width: 701px)" >
-    <source srcset="/img/articles/2018/02/purgatorio.webp" type="image/webp">
-    <img src="/img/articles/2018/02/purgatorio.jpg" alt="Hoarders and Wasters">
+    <source srcset="/img/articles/2018/02/inferno.webp" type="image/webp">
+    <img src="/img/articles/2018/02/inferno.jpg" alt="Hoarders and Wasters">
   </picture>
   <figcaption>Gustave Doré's: The hoarders and wasters. "For all the gold that is beneath the moon, / Or ever has been, of these weary souls / Could never make a single one reponse." <a href="https://en.wikipedia.org/wiki/File:Gustave_Dor%C3%A9_-_Dante_Alighieri_-_Inferno_-_Plate_22_(Canto_VII_-_Hoarders_and_Waster.jpg">Wikimedia</a></figcaption>
 </figure>
