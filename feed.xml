@@ -6,8 +6,8 @@
 </description>
     <link>http://www.anthonytrama.com//</link>
     <atom:link href="http://www.anthonytrama.com//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Feb 2018 04:40:19 +0000</pubDate>
-    <lastBuildDate>Fri, 09 Feb 2018 04:40:19 +0000</lastBuildDate>
+    <pubDate>Sat, 10 Feb 2018 04:29:54 +0000</pubDate>
+    <lastBuildDate>Sat, 10 Feb 2018 04:29:54 +0000</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -17,7 +17,7 @@
 &lt;h2 id=&quot;what-do-i-mean-by-asynchronous-javascript&quot;&gt;What do I Mean by Asynchronous JavaScript?&lt;/h2&gt;
 &lt;p&gt;Asynchronous programming allows different events to occur independently of the flow in the main program. On websites, this means that different events can occur that update state with user input, refresh a list while the user does something else on the page, or check properties of different objects, all without blocking each other.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-two-circles-of-callback-hell-purgatorio&quot;&gt;The Two Circles of Callback Hell (purgatorio)&lt;/h2&gt;
+&lt;h2 id=&quot;the-two-circles-of-callback-hell-inferno&quot;&gt;The Two Circles of Callback Hell (Inferno)&lt;/h2&gt;
 
 &lt;figure&gt;
   &lt;picture&gt;
@@ -25,8 +25,8 @@
     &lt;source srcset=&quot;/img/articles/2018/02/infernoLg.jpg&quot; media=&quot;(min-width: 1400px)&quot; /&gt;
     &lt;source srcset=&quot;/img/articles/2018/02/infernoSm.webp&quot; media=&quot;(min-width: 701px)&quot; type=&quot;image/webp&quot; /&gt;
     &lt;source srcset=&quot;/img/articles/2018/02/infernoSm.jpg&quot; media=&quot;(min-width: 701px)&quot; /&gt;
-    &lt;source srcset=&quot;/img/articles/2018/02/purgatorio.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img src=&quot;/img/articles/2018/02/purgatorio.jpg&quot; alt=&quot;Hoarders and Wasters&quot; /&gt;
+    &lt;source srcset=&quot;/img/articles/2018/02/inferno.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img src=&quot;/img/articles/2018/02/inferno.jpg&quot; alt=&quot;Hoarders and Wasters&quot; /&gt;
   &lt;/picture&gt;
   &lt;figcaption&gt;Gustave Doré's: The hoarders and wasters. &quot;For all the gold that is beneath the moon, / Or ever has been, of these weary souls / Could never make a single one reponse.&quot; &lt;a href=&quot;https://en.wikipedia.org/wiki/File:Gustave_Dor%C3%A9_-_Dante_Alighieri_-_Inferno_-_Plate_22_(Canto_VII_-_Hoarders_and_Waster.jpg&quot;&gt;Wikimedia&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
