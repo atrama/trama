@@ -1,16 +1,98 @@
 ---
+import Layout from '../components/layout.astro'
+import Contact from '../components/home/contact.astro'
+import { Picture } from 'astro:assets'
+import anthony from '../img/anthony.jpeg'
+import '../style/var.css'
 
+const pageInfo = {
+	title: "Anthony Trama",
+	heading : "Hi, I'm Anthony",
+}
 ---
+<Layout>
+	<section class="about">
+		<Picture src={anthony} formats={['avif', 'webp']} alt="Photo of a man in a hat smiling" />
+		<h1>{pageInfo.heading}</h1>
+		<div class="content">
+			<p>I live in San Diego and have been making websites since...well, a long time ago. I lead a Front End Team that has a lot of amazing people spread out across the USA.</p>
+			<p>When I'm not working, I can be found in the garage building custom furniture, playing drums, walking my old lab who still thinks he's a puppy, or on the field coaching my two sons.</p>
+			<p>Take a look at my latest <a href="https://github.com/{{ site.github_username }}" title="github">work</a>, what I'm <a href="https://medium.com/@anthonytrama">writing</a>, or just <a href="#contact">say "hi"</a>.</p>
+		</div>	
+	</section>
+	<!-- <Contact /> -->
+</Layout>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<style>
+
+.about{
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	align-items: center;
+	justify-content: stretch;
+	grid-gap:2rem;
+	grid-template-areas: 
+		"heading heading"
+		"picture content";
+	/* padding-top: 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center; */
+		/* @include mq($size:md){
+		padding-bottom: 1.5rem;
+		} */
+	}
+
+	h1 {
+		grid-area: heading;
+		margin: 0.5rem 0 0;
+	  color: var(--green);
+	  font-size: 14vw;
+	  @media (min-width: 450px) {
+		font-size: 13vw;
+	  }
+	}
+  
+	.content {
+		grid-area: content;
+	  /* flex: 8 4 75vw; */
+	}
+  
+	@media (min-width: 701px) {
+	  h1 {
+		font-size: 10.2vw;
+		flex-basis: 100%;
+	  }
+	  .about {
+		padding-bottom: 1.5rem;
+	  }
+	  .content {
+		flex: 8 1 50%;
+		order: 3;
+	  }
+	}
+  
+	@media (min-width: 1401px) {
+	  h1 {
+		margin-bottom: 1rem;
+		font-size: 9.5vw;
+	  }
+	}
+  
+	picture {
+	  /* margin: 0;
+	  display: flex;
+	  flex: 1 1 25vw;
+	  @include mq($size: md) {
+		flex: 1 1 25%;
+		order: 2;
+	  } */
+  
+	  img {
+		grid-area:picture;
+		width: 20vw;
+		height: 20vw;
+		border-radius: 100%;
+	  }
+	}
+</style>

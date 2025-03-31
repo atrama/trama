@@ -1,0 +1,20 @@
+:root {
+  /* --breakpoint-xs: 450px;
+    --sm: 701px;
+    --md: 1101px;
+    --lg: 1401px; */
+
+  --green: #79b791;
+  --main: #2e3532;
+  /* $mainLight: lighten($main, 45%);
+$green:#79B791;
+$greenLt:#D3FAD6;*/
+  --blue: hsl(190, 28%, 58%);
+  /*$red:#EF6F6C;//FE5F55;
+$yellow: hsla(45, 100%, 80%, 1);
+$gray: hsla(221, 10%, 86%, 1);
+$grayTrans: hsla(221, 10%, 86%, .75); */
+
+  --fontHeading: 'Lato', sans-serif;
+  --fontBody: 'Merriweather', serif;
+}
