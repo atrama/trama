@@ -12,8 +12,8 @@ $greenLt:#D3FAD6;*/
   --blue: hsl(190, 28%, 58%);
   /*$red:#EF6F6C;//FE5F55;
 $yellow: hsla(45, 100%, 80%, 1);
-$gray: hsla(221, 10%, 86%, 1);
-$grayTrans: hsla(221, 10%, 86%, .75); */
+$gray: hsla(221, 10%, 86%, 1);*/
+  --grayTrans: hsl(from var(--main) h s l / 0.15);
 
   --fontHeading: 'Lato', sans-serif;
   --fontBody: 'Merriweather', serif;
