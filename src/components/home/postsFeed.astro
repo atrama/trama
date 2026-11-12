@@ -7,28 +7,39 @@ interface Post {
   url: string;
   date: string;
 }
-const isDev = import.meta.env.DEV;
 
-const determinePostSource = async (devEnv: boolean) => {
-  if (devEnv) {
-    return mockPosts;
-  }
-  const response = await fetch('https://medium.com/feed/@anthonytrama');
-  const responseText = await response.text();
-  const data = new XMLParser().parse(responseText).rss.channel.item;
-  return data;
-};
+interface FeedItem {
+  title: string;
+  link: string;
+  pubDate: string;
+}
 
-const fetchPosts = async () => {
+const fetchPosts = async (): Promise<Post[]> => {
   try {
-    const data = await determinePostSource(isDev);
-    const posts: Post[] = data.map((item: any) => ({
+    let items: FeedItem[];
+    if (import.meta.env.DEV) {
+      items = mockPosts;
+    } else {
+      const response = await fetch('https://medium.com/feed/@anthonytrama');
+      if (!response.ok) {
+        throw new Error(`Medium feed returned HTTP ${response.status}`);
+      }
+
+      const feed = new XMLParser().parse(await response.text());
+      const feedItems = feed?.rss?.channel?.item;
+      if (!feedItems) {
+        throw new Error('Medium feed did not contain any RSS items');
+      }
+      items = Array.isArray(feedItems) ? feedItems : [feedItems];
+    }
+
+    return items.map((item) => ({
       title: item.title,
       url: item.link,
       date: new Date(item.pubDate).toLocaleDateString('en-US'),
     }));
-    return posts;
   } catch (error) {
+    console.error('Unable to load the Medium feed; showing the Medium link instead.', error);
     return [];
   }
 }; 
