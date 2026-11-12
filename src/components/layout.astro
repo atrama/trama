@@ -1,10 +1,26 @@
+---
+import GithubIcon from '../img/icon-github.svg';
+import LinkedinIcon from '../img/icon-linkedin.svg';
+import MediumIcon from '../img/icon-medium.svg';
+---
+
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Anthony Trama</title>
+    <meta name="description" content="Personal website of Anthony Trama" />
+   <!-- <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="manifest" href="/manifest.json"> -->
+  <meta name="google-site-verification" content="3DJXBbNINQJskR61VvQggaOhfhRrMtfK-rtsvn26R9s" />  
+
+  <title>Anthony Trama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Lato:700,900|Merriweather:400,700,400italic" rel="stylesheet" type="text/css" >
+
 	</head>
     <body>
 		<header>
@@ -18,14 +34,23 @@
 	<main>
         <slot />
     </main>
+    <footer class="site-footer">
+
+
+<h2 class="footerHeading">Anthony Trama</h2>
+<ul class="social">
+  <li>
+    <a href="https://github.com/atrama" title="github"><span class="icon icon--github"><GithubIcon /></span></a>
+  </li>
+  <li>
+    <a href="https://www.linkedin.com/in/anthonytrama" title="linkedin"><span class="icon icon--linkedin"><LinkedinIcon /></span></a>
+  </li>
+  <li>
+    <a href="https://medium.com/@anthonytrama" title="medium"><span class="icon icon--medium"><MediumIcon /></span></a>
+  </li>
+</ul>
+</footer>
     </body>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Lato:700,900|Merriweather:400,700,400italic" rel="stylesheet" type="text/css" >
-
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Lato:wght@700;900&display=swap" rel="stylesheet"> -->
-
-    <!-- <link href="https://fonts.googleapis.com/css?family=Lato:700,900|Merriweather:400,700,300,400italic" rel="stylesheet" type="text/css" > -->
 </html>
 
 <style is:global>
@@ -33,85 +58,80 @@
     box-sizing: border-box;
   }
   html {
-    font-size:20px;
+    font-size: clamp(16px, 2vw, 20px);
   }
   body {
     margin: 0;
-    padding: 0 1.5%;
-    color:var(--main);
+    padding: 0;
+    color: var(--color-main);
+    background: var(--color-main-contrast);
     line-height: 1.7;
     font-family: var(--fontBody);
-    /* //sticky footer
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; */
   }
-
-
-@media (min-width: 701px) {
-	body {
-		padding: 0 5%;
-	}
-}
-
-@media (min-width: 1001px) {
-  body {
-    padding: 0 5%;
+  main {
+    container-type: inline-size;
+    padding-inline: var(--page-gutter);
   }
-}
-  
-@media (min-width: 1401px) {
-	body {
-		padding: 0 10%;
-	}
-}
 </style>
 
 <style>
-
-/* 
-@mixin sitePadding($body:false){
-  padding:0 1.5%;
-
-  @include mq($size:md){
-    @if $body == true {
-      padding: 0 5%;
-    } @else{
-      padding: 0 5.5%;
-    }
-  }
-  @include mq(){
-    @if $body == true {
-      padding: 0 10%;
-    } @else{
-      padding: 0 12.5%;
-    }
-  } */
-
 header{
-  margin:.5rem 0 0;
-  padding: .25rem 0;
-  border-bottom: .15rem solid var(--main);
-  display: flex;
+  margin: .5rem 0 0;
+  padding-inline: var(--page-gutter);
+  border-bottom: .15rem solid var(--color-main);
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: baseline;
 
   h1{
     margin:0;
-    font-size:1rem;
-    flex: 2 5 5rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
   }
 
   a{
-    color:inherit;
+    color: inherit;
     text-decoration: none;
     font-weight: 700;
   }
 }
 
 .mainNav{
-  margin-left:auto;
   text-align: right;
-  flex: 4 1 auto;
+
+  a:not(:first-of-type){
+      padding-left: clamp(10px, 1rem, 2.5rem);
+    }
+}
+
+footer {
+  margin-top: 2rem;
+  padding: .5rem var(--page-gutter);
+  border-top: solid 0.4rem var(--color-main);  border-top: solid .4rem var(--color-main);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  h2 {
+    margin:0;
+    font-size: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 1rem;
+
+    li{
+      width: clamp(20px, 2rem, 40px);
+    }
+  }
+
+  svg{
+    fill: var(--color-main);
+  }
 }
 
 :global(h1, h2, h3){
@@ -122,7 +142,7 @@ header{
 }
 
 :global(h1){
-  font-size:4rem;
+  font-size: clamp(2rem, 8vw, 4rem);
 }
 
 :global(p){
@@ -130,33 +150,20 @@ header{
 }
 
 :global(a){
-  color:var(--blue);
-  filter:brightness(100%);
+  color: var(--color-accent);
+  filter: brightness(100%);
   text-decoration: none;
-  transition:.5s filter ease-in-out;
-
-  &:hover{
-    text-decoration: underline;
-    filter:brightness(5%);
-  }
-}
-  /* --breakpoint-xs: 450px;
-    --sm: 701px;
-    --md: 1101px;
-    --lg: 1401px; */
-
-@media (min-width: 450px) {
-  header h1 {
-    flex: 1 1 8rem;
-  }
-  .mainNav a:not(:first-of-type){
-    padding-left: 1rem;
-  }
+  transition: filter 0.5s ease-in-out;
 }
 
-@media (min-width: 1001px) {
-  header{
-    margin-bottom: 2rem;
+:global(a:hover){
+  text-decoration: underline;
+  filter: brightness(80%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(a) {
+    transition: none;
   }
 }
 

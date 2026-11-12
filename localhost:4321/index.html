@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-6j4h3e44> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width"><title>Anthony Trama</title><style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro?astro&#38;type=style&#38;index=0&#38;lang.css">header[data-astro-cid-6j4h3e44]{margin:.5rem 0 0;padding:.25rem 0;border-bottom:.15rem solid var(--main);display:flex;align-items:baseline;h1{margin:0; font-size:1rem; flex: 2 5 5rem;} a{color:inherit; text-decoration: none; font-weight: 700;}}.mainNav[data-astro-cid-6j4h3e44]{margin-left:auto;text-align:right;flex:4 1 auto}h1,h2,h3{font-family:var(--fontHeading);text-transform:uppercase;font-weight:900;line-height:1.4}h1{font-size:4rem}p{line-height:1.7}a{color:var(--blue);filter:brightness(100%);text-decoration:none;transition:.5s filter ease-in-out;&[data-astro-cid-6j4h3e44]:hover{text-decoration:underline;filter:brightness(5%)}}@media (min-width: 450px){header[data-astro-cid-6j4h3e44] h1[data-astro-cid-6j4h3e44]{flex:1 1 8rem}.mainNav[data-astro-cid-6j4h3e44] a[data-astro-cid-6j4h3e44]:not(:first-of-type){padding-left:1rem}}@media (min-width: 1001px){header[data-astro-cid-6j4h3e44]{margin-bottom:2rem}}</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro?astro&#38;type=style&#38;index=1&#38;lang.css">* {
+    box-sizing: border-box;
+  }
+  html {
+    font-size:20px;
+  }
+  body {
+    margin: 0;
+    padding: 0 1.5%;
+    color:var(--main);
+    line-height: 1.7;
+    font-family: var(--fontBody);
+    /* //sticky footer
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; */
+  }
+
+
+@media (min-width: 701px) {
+	body {
+		padding: 0 5%;
+	}
+}
+
+@media (min-width: 1001px) {
+  body {
+    padding: 0 5%;
+  }
+}
+  
+@media (min-width: 1401px) {
+	body {
+		padding: 0 10%;
+	}
+}</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/components/home/postsFeed.astro?astro&#38;type=style&#38;index=0&#38;lang.css">@keyframes slide-rl{from,60%,75%,90%,to{animation-timing-function:cubic-bezier(0.215,0.61,0.355,1)}0%{transform:translateX(0)}14%{transform:translateX(-100%)}17%{transform:translateX(-90%)}20%{transform:translateX(-100%)}22%{transform:translateX(-95%)}24%{transform:translateX(-100%)}60%{transform:translateX(-102%)}100%{transform:translateX(0)}}@media (prefers-reduced-motion: reduce){.postHeadingContainer[data-astro-cid-6cqtswit] h1[data-astro-cid-6cqtswit].animate,.postHeadingContainer[data-astro-cid-6cqtswit] h1[data-astro-cid-6cqtswit]{animation:none;transition:none}}</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/components/home/posts.astro?astro&#38;type=style&#38;index=0&#38;lang.css">header[data-astro-cid-3zdtd6d3]{display:block;text-align:center;h1{margin-bottom:.25rem;}}} @keyframes slide-rl{from,60%,75%,90%,to {animation-timing-function: cubic-bezier(0.215,0.61,0.355,1);} 0% {transform: translateX(0);} 14% {transform: translateX(-100%);} 17% {transform: translateX(-90%);} 20% {transform: translateX(-100%);} 22% {transform: translateX(-95%);} 24% {transform: translateX(-100%);} 60% {transform: translateX(-102%);} 100% {transform: translateX(0);}}@media (prefers-reduced-motion: reduce){.postHeadingContainer[data-astro-cid-3zdtd6d3] h1[data-astro-cid-3zdtd6d3].animate,.postHeadingContainer[data-astro-cid-3zdtd6d3] margin-bottom: .75rem;padding: .25em 1em 0;display: inline-block;font-size:2.5rem;color:white;background: red;will-change: transform;ine-block;/* font-size:2.5rem; */color:white;text-align: center;background: var(--green);will-change: transform; @container (width >= 701px) {font-size: 4.5rem; &.animate {animation: slide-rl 6s 1 cubic-bezier(0.175,0.885,0.32,1.275) both;}} @include mq ($size:sm){font-size:3rem;} @include mq ($size:md){font-size:4rem;} &:after{width: 100%; border-width: 0 .65em .25em; border-style: solid; border-color: var(--green) transparent; display: block; content: "";}} .allPosts{margin:0 2%; text-align: right;}}.postsContainer[data-astro-cid-3zdtd6d3]{container-type:inline-size}.posts[data-astro-cid-3zdtd6d3]{display:grid;grid-template-columns:minmax(30rem,60rem);column-gap:1rem;row-gap:1rem;grid-gap:1rem;article{margin-bottom: 2rem; padding:2rem; box-shadow: 0 0 1.25rem .15rem var(--grayTrans); background: #fff;} article h1{margin: 0; font-size:1.5rem;}}@media (min-width: 1101px){.posts[data-astro-cid-3zdtd6d3]{display:flex;flex-wrap:wrap;article{flex:1 1 44%; margin: 1rem 2% 1rem;}}}@media (min-width: 1401px){.posts[data-astro-cid-3zdtd6d3] article[data-astro-cid-3zdtd6d3]{padding:.75rem 1rem}}.post-meta[data-astro-cid-3zdtd6d3]{margin-top:.25rem;font-size:.85rem}</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/style/var.css">:root {
+  /* --breakpoint-xs: 450px;
+    --sm: 701px;
+    --md: 1101px;
+    --lg: 1401px; */
+
+  --green: #79b791;
+  --main: #2e3532;
+  /* $mainLight: lighten($main, 45%);
+$green:#79B791;
+$greenLt:#D3FAD6;*/
+  --blue: hsl(190, 28%, 58%);
+  /*$red:#EF6F6C;//FE5F55;
+$yellow: hsla(45, 100%, 80%, 1);
+$gray: hsla(221, 10%, 86%, 1);*/
+  --grayTrans: hsl(from var(--main) h s l / 0.15);
+
+  --fontHeading: 'Lato', sans-serif;
+  --fontBody: 'Merriweather', serif;
+}
+</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.about[data-astro-cid-j7pv25f6]{display:grid;align-items:center;grid-template-columns:1fr minmax(50%,65%);grid-gap:1rem;grid-template-areas:"picture heading" "content content";padding-top:1.5rem;container-name:about;container-type:inline-size}h1[data-astro-cid-j7pv25f6]{grid-area:heading;margin:0.5rem 0 0;color:var(--green);font-size:10vw}@container about (min-width: 300px){h1[data-astro-cid-j7pv25f6]{font-size:clamp(3rem,100cqw / 8,9.5vw)}}.content[data-astro-cid-j7pv25f6]{grid-area:content}@media (min-width: 701px){.about[data-astro-cid-j7pv25f6]{padding-bottom:1.5rem;grid-template-areas:"heading heading" "picture content"}}picture[data-astro-cid-j7pv25f6]{grid-area:picture;img {display: block; width: 100%; height: auto; border-radius: 100%; aspect-ratio:1/1}}</style>
+<style data-vite-dev-id="/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/components/viewtransitions.css">@keyframes astroFadeInOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes astroFadeIn {
+	from {
+		opacity: 0;
+		mix-blend-mode: plus-lighter;
+	}
+	to {
+		opacity: 1;
+		mix-blend-mode: plus-lighter;
+	}
+}
+
+@keyframes astroFadeOut {
+	from {
+		opacity: 1;
+		mix-blend-mode: plus-lighter;
+	}
+	to {
+		opacity: 0;
+		mix-blend-mode: plus-lighter;
+	}
+}
+
+@keyframes astroSlideFromRight {
+	from {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes astroSlideFromLeft {
+	from {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes astroSlideToRight {
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes astroSlideToLeft {
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+
+	[data-astro-transition-scope] {
+		animation: none !important;
+	}
+}
+</style><script type="module" src="/@vite/client"></script>
+<script type="module" src="/@fs/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js?v=0e09d858"></script>
+<script>window.__astro_dev_toolbar__ = {"root":"/Users/anthonytrama/Dev/Repo/trama2/","version":"5.16.9","debugInfo":"Astro                    v5.16.9\nNode                     v22.11.0\nSystem                   macOS (x64)\nPackage Manager          npm\nOutput                   static\nAdapter                  @astrojs/node\nIntegrations             @astrojs/node\n                         @astrojs/react"}</script>
+<script type="module" src="/src/components/layout.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/layout.astro?astro&type=style&index=1&lang.css"></script>
+<script type="module" src="/src/components/home/postsFeed.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/home/posts.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/style/var.css"></script>
+<script type="module" src="/src/pages/index.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/node_modules/astro/components/viewtransitions.css"></script><link rel="preload" as="fetch" href="/_server-islands/Posts?e=default&p=A3E8D959069EDC40F9E871B254KBHQzbscXKAGwm2SScvZaTTtWIrrUG%2FTFko7liiOB9RqIuxPxpQkbjk2XFTcpm&s=" crossorigin="anonymous"></head> <body data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="9:11"> <header data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="10:11"> <h1 data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="11:9"><a href="/" data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="11:20">Anthony Trama</a></h1> <nav class="mainNav" data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="13:26"> <a href="/blog" data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="14:22">Writing</a> <a href="/#contact" data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="15:26">Contact</a> </nav> </header> <main data-astro-cid-6j4h3e44 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/components/layout.astro" data-astro-source-loc="18:8">  <section class="about" data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="17:25"> <!-- <Image src={anthony} alt="Photo of a man in a hat smiling" /> --> <picture data-astro-cid-j7pv25f6="true" data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/components/Picture.astro" data-astro-source-loc="114:33"> <source srcset="/_image?href=%2F%40fs%2FUsers%2Fanthonytrama%2FDev%2FRepo%2Ftrama2%2Fsrc%2Fimg%2Fanthony.jpeg%3ForigWidth%3D818%26origHeight%3D818%26origFormat%3Djpg&#38;w=818&#38;h=818&#38;f=webp" type="image/webp" data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/components/Picture.astro" data-astro-source-loc="122:6"><source srcset="/_image?href=%2F%40fs%2FUsers%2Fanthonytrama%2FDev%2FRepo%2Ftrama2%2Fsrc%2Fimg%2Fanthony.jpeg%3ForigWidth%3D818%26origHeight%3D818%26origFormat%3Djpg&#38;w=818&#38;h=818&#38;f=jpeg" type="image/jpeg" data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/components/Picture.astro" data-astro-source-loc="122:6">  <img src="/_image?href=%2F%40fs%2FUsers%2Fanthonytrama%2FDev%2FRepo%2Ftrama2%2Fsrc%2Fimg%2Fanthony.jpeg%3ForigWidth%3D818%26origHeight%3D818%26origFormat%3Djpg&#38;w=818&#38;h=818&#38;f=jpg" data-image-component="true" alt="Photo of a man in a hat smiling" data-astro-cid-j7pv25f6="true" loading="lazy" decoding="async" fetchpriority="auto" width="818" height="818" data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/node_modules/astro/components/Picture.astro" data-astro-source-loc="131:3"> </picture> <h1 data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="21:7">Hi, I&#39;m Anthony</h1> <div class="content" data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="22:24"> <p data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="23:7">I live in San Diego and have been making websites since...well, a long time ago. I lead a Front End Team that has a lot of amazing people spread out across the USA.</p> <p data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="24:7">When I'm not working, I can be found in the garage building custom furniture, playing drums, walking my old lab who still thinks he's a puppy, or on the baseball field coaching my kids.</p> <p data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="25:7">Take a look at what I'm <a href="https://medium.com/@anthonytrama" data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="25:74">writing</a> or just <a href="#contact" data-astro-cid-j7pv25f6 data-astro-source-file="/Users/anthonytrama/Dev/Repo/trama2/src/pages/index.astro" data-astro-source-loc="25:113">say "hi"</a>.</p> </div> </section> <script>async function replaceServerIsland(id, r) { let s = document.querySelector(`script[data-island-id="${id}"]`); if (!s || r.status !== 200 || r.headers.get('content-type')?.split(';')[0].trim() !== 'text/html') return; let html = await r.text(); while (s.previousSibling && s.previousSibling.nodeType !== 8 && s.previousSibling.data !== '[if astro]>server-island-start<![endif]') s.previousSibling.remove(); s.previousSibling?.remove(); s.before(document.createRange().createContextualFragment(html)); s.remove(); }</script><!--[if astro]>server-island-start<![endif]--><script type="module" data-astro-rerun data-island-id="ab22821f-e382-4d0d-bf47-fc8034b3e917">const headers = new Headers({});
+let response = await fetch('/_server-islands/Posts?e=default&p=A3E8D959069EDC40F9E871B254KBHQzbscXKAGwm2SScvZaTTtWIrrUG%2FTFko7liiOB9RqIuxPxpQkbjk2XFTcpm&s=', { headers });replaceServerIsland('ab22821f-e382-4d0d-bf47-fc8034b3e917', response);</script>   </main> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css?family=Lato:700,900|Merriweather:400,700,400italic" rel="stylesheet" type="text/css"> <!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Lato:wght@700;900&display=swap" rel="stylesheet"> --> <!-- <link href="https://fonts.googleapis.com/css?family=Lato:700,900|Merriweather:400,700,300,400italic" rel="stylesheet" type="text/css" > -->  </body></html> 

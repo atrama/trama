@@ -13,7 +13,6 @@ const pageInfo = {
 }
 ---
 <Layout>
-		<Posts/>
 
 	<section class="about">
 		<!-- <Image src={anthony} alt="Photo of a man in a hat smiling" /> -->
@@ -22,11 +21,14 @@ const pageInfo = {
 		<h1>{pageInfo.heading}</h1>
 		<div class="content">
 			<p>I live in San Diego and have been making websites since...well, a long time ago. I lead a Front End Team that has a lot of amazing people spread out across the USA.</p>
-			<p>When I'm not working, I can be found in the garage building custom furniture, playing drums, walking my old lab who still thinks he's a puppy, or on the field coaching my two sons.</p>
+			<p>When I'm not working, I can be found in the garage building custom furniture, playing drums, walking my old lab who still thinks he's a puppy, or on the baseball field coaching my kids.</p>
 			<p>Take a look at what I'm <a href="https://medium.com/@anthonytrama">writing</a> or just <a href="#contact">say "hi"</a>.</p>
 		</div>	
 	</section>
-	<!-- <Contact /> -->
+
+	<Posts server:defer/>
+
+	<Contact />
 </Layout>
 
 <style>
@@ -47,7 +49,7 @@ const pageInfo = {
 	h1 {
 	grid-area: heading;
 	margin: 0.5rem 0 0;
-	color: var(--green);
+	color: var(--color-highlight);
 	font-size: 10vw;
 	}
  
