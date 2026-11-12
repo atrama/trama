@@ -33,12 +33,20 @@ Refactor the provided CSS to modern standards following these practices:
 - Reference tokens in component styles using `var(--token-name)`
 - Color tokens should never be named the color (e.g., `--color-blue`) but instead should be named for their purpose (e.g., `--color-primary`). This allows for easier theming with dark mode where blue may be the primary color in light mode but a different color in dark mode.
 
+## Dark Mode
+
+- Keep the light and dark values for this project's semantic color tokens in `src/style/var.css`, using `light-dark(light-value, dark-value)` and `color-scheme: light dark` for system-preference theming.
+- Prefer updating shared tokens over adding duplicate dark-mode overrides in component styles.
+- Separate foreground and background tokens when a brand color serves both roles, so text remains legible in both schemes.
+- Check the actual foreground/background pairings for body text, links, headings, buttons, forms, alerts, and interactive states in both schemes. Meet WCAG AA contrast: at least 4.5:1 for normal text and 3:1 for large text.
+- Preserve the brand character when choosing dark values, but prioritize readable contrast. Do not assume that a color passing contrast on a light background also passes on a dark one.
+
 ## Accessibility
 
 - Keep browser default focus styles for interactive elements (anchors, buttons, form inputs).
-- Ensure sufficient color contrast (WCAG AA minimum 4.5:1)
+- Ensure sufficient color contrast (WCAG AA: 4.5:1 for normal text and 3:1 for large text)
 - Include `prefers-reduced-motion` media query for animations
-- use `prefers-color-scheme` to adapt to light/dark modes. If there is not a dark mode, suggest one and use `prefers-color-scheme` and css-custom properties to implement it.
+- Use `prefers-color-scheme` via `light-dark()` and semantic custom properties for system-preference theming.
 
 ## Code Quality
 

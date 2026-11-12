@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light dark;
+
   --space-xs: 0.5rem;
   --space-sm: 2%;
   --space-md: 3rem;
@@ -8,23 +10,18 @@
 
   --page-gutter: clamp(1.5%, 5vw, 10%);
 
-  --color-main: rgb(46 53 50); /* #2e3532 */
-  --color-main-contrast: rgb(255 255 255); /* #fff */
-  --color-accent: rgb(118 168 178); /* #76a8b2 */
-  --color-highlight: rgb(121 183 145); /* #79b791 */
-  --color-text-accent: rgb(255 255 255);
-  --color-text-accent-contrast: rgb(46 53 50); /* #2e3532 */
-  --color-alert: rgb(255 230 153); /* #ffe699 */
-  --color-disabled: rgb(216 218 223); /* #d8dadf */
-  --color-shadow: rgb(var(--color-main) / 0.5);
+  --color-main: light-dark(#2e3532, #ccd1cf);
+  --color-main-contrast: light-dark(#fff, #181a19);
+  --color-accent: light-dark(#3b747a, #89bab2);
+  --color-highlight: light-dark(#39724b, #8ec29f);
+  --color-highlight-text: light-dark(#39724b, #a9d8b2);
+  --color-text-accent: light-dark(#fff, #192b29);
+  --color-text-accent-contrast: light-dark(#2e3532, #e3ebe5);
+  --color-alert: light-dark(#ffe699, #5a471d);
+  --color-disabled: light-dark(#d8dadf, #3a4540);
+  --color-shadow: light-dark(rgb(46 53 50 / 0.5), rgb(0 0 0 / 0.55));
+  --color-link: var(--color-accent);
 
   --fontHeading: 'Lato', sans-serif;
   --fontBody: 'Merriweather', serif;
-
-  /* @media (prefers-color-scheme: dark) {
-    --color-main: rgb(255 255 255);
-    --color-main-contrast: rgb(46 53 50);
-    --color-text-accent-contrast: rgb(255 255 255);
-    --color-text-accent: rgb(46 53 50);
-  } */
 }
